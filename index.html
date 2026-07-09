@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoCab — Poste de Pilotage</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --paper:#F2EFE6;
+  --card:#FFFFFF;
+  --ink:#20242B;
+  --ink-soft:#585C63;
+  --line:#DCD7C7;
+  --gold:#AD7F26;
+  --gold-soft:#F1E6CC;
+  --green:#2E6A46;
+  --green-soft:#E4EEE4;
+  --amber:#B4780E;
+  --amber-soft:#F7EAD3;
+  --red:#A2392B;
+  --red-soft:#F5E1DD;
+  --blue:#33517D;
+  --blue-soft:#E5E9F1;
+}
+
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Public Sans',sans-serif;}
+h1,h2,h3{font-family:'Oswald',sans-serif;margin:0;text-transform:uppercase;letter-spacing:.03em;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+/* ---------- layout ---------- */
+.app{display:flex;min-height:100vh;}
+.sidebar{
+  width:220px;flex-shrink:0;background:var(--ink);color:#EDEAE0;
+  display:flex;flex-direction:column;padding:22px 0;
+}
+.brand{padding:0 20px 22px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:14px;}
+.brand .stamp-mark{
+  width:34px;height:34px;border:2px solid var(--gold);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-family:'Oswald';
+  font-weight:700;color:var(--gold);font-size:13px;margin-bottom:10px;
+}
+.brand h1{font-size:16px;color:#fff;line-height:1.3;}
+.brand p{font-size:11px;color:#B7B2A2;margin:4px 0 0;text-transform:uppercase;letter-spacing:.06em;}
+
+.nav{display:flex;flex-direction:column;gap:2px;padding:0 10px;}
+.nav button{
+  all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:4px;font-size:13px;color:#C9C5B6;
+  font-weight:500;letter-spacing:.02em;
+}
+.nav button:hover{background:rgba(255,255,255,.06);color:#fff;}
+.nav button.active{background:var(--gold);color:#231A05;}
+.nav svg{width:16px;height:16px;flex-shrink:0;}
+
+.main{flex:1;min-width:0;padding:28px 34px 60px;}
+.topbar{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px;flex-wrap:wrap;gap:8px;}
+.topbar h2{font-size:22px;}
+.topbar .date{font-size:12px;color:var(--ink-soft);font-family:'IBM Plex Mono';}
+
+.view{display:none;}
+.view.active{display:block;}
+
+/* ---------- section header bar (echoes the fiche de poste) ---------- */
+.bar{
+  background:var(--ink);color:#fff;padding:9px 16px;font-size:12.5px;
+  font-family:'Oswald';letter-spacing:.06em;text-transform:uppercase;
+  border-left:4px solid var(--gold);margin:26px 0 14px;
+}
+.bar:first-of-type{margin-top:0;}
+
+/* ---------- cards / grid ---------- */
+.grid{display:grid;gap:14px;}
+.grid-kpi{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:16px 18px;position:relative;overflow:hidden;
+}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);}
+.kpi-label{font-size:11.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;font-weight:600;min-height:30px;}
+.kpi-row{display:flex;align-items:baseline;gap:8px;margin-top:10px;}
+.kpi-value{font-family:'IBM Plex Mono';font-size:26px;font-weight:600;}
+.kpi-target{font-size:11px;color:var(--ink-soft);}
+.kpi-freq{display:inline-block;margin-top:6px;font-size:10px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;}
+.bar-track{height:6px;border-radius:3px;background:#EEE9DA;margin-top:10px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;}
+.kpi-input{margin-top:10px;display:flex;gap:6px;align-items:center;}
+.kpi-input input{width:70px;}
+
+/* ---------- form elements ---------- */
+input,select,textarea{
+  font-family:'Public Sans',sans-serif;font-size:13px;border:1px solid var(--line);
+  border-radius:4px;padding:7px 9px;background:#FDFCF9;color:var(--ink);
+}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold-soft);border-color:var(--gold);}
+textarea{width:100%;resize:vertical;font-family:'Public Sans';line-height:1.5;}
+button.btn{
+  font-family:'Public Sans';font-size:12.5px;font-weight:600;border:1px solid var(--ink);
+  background:var(--ink);color:#fff;padding:8px 14px;border-radius:4px;cursor:pointer;
+  letter-spacing:.02em;
+}
+button.btn:hover{background:#33383F;}
+button.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+button.btn.ghost:hover{background:#EFEAD9;}
+button.btn.small{padding:5px 10px;font-size:11.5px;}
+button.icon-btn{all:unset;cursor:pointer;color:var(--ink-soft);padding:4px;border-radius:3px;}
+button.icon-btn:hover{background:#EFEAD9;color:var(--ink);}
+
+/* ---------- stamps (status badges) ---------- */
+.stamp{
+  display:inline-flex;align-items:center;gap:5px;font-family:'IBM Plex Mono';
+  font-size:10.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;
+  padding:4px 9px;border-radius:3px;border:1.5px solid;white-space:nowrap;
+}
+.stamp.valide{color:var(--green);border-color:var(--green);background:var(--green-soft);}
+.stamp.renouveler{color:var(--amber);border-color:var(--amber);background:var(--amber-soft);}
+.stamp.expire{color:var(--red);border-color:var(--red);background:var(--red-soft);}
+
+/* ---------- alerts panel ---------- */
+.alert-list{display:flex;flex-direction:column;gap:0;}
+.alert-row{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:10px 4px;border-bottom:1px solid var(--line);font-size:13px;
+}
+.alert-row:last-child{border-bottom:none;}
+.alert-row .who{color:var(--ink-soft);font-size:11.5px;}
+.empty{padding:26px 10px;text-align:center;color:var(--ink-soft);font-size:13px;}
+.empty b{display:block;color:var(--ink);font-size:14px;margin-bottom:4px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.03em;}
+
+/* ---------- vehicle table ---------- */
+.filters{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
+.filters button{
+  all:unset;cursor:pointer;font-size:11.5px;font-weight:600;padding:6px 12px;
+  border-radius:20px;border:1px solid var(--line);color:var(--ink-soft);
+}
+.filters button.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+thead th{
+  background:#EFEAD9;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;
+  text-align:left;padding:9px 12px;color:var(--ink-soft);font-weight:700;border-bottom:1px solid var(--line);
+}
+tbody td{padding:10px 12px;font-size:13px;border-bottom:1px solid var(--line);vertical-align:middle;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:#FBF9F3;}
+.plate{font-family:'IBM Plex Mono';font-weight:600;letter-spacing:.03em;}
+.actions-cell{display:flex;gap:4px;}
+
+.add-form{
+  background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:16px 18px;margin-top:14px;
+}
+.add-form h3{font-size:12.5px;margin-bottom:12px;color:var(--ink-soft);}
+.add-form .row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
+.add-form .field{display:flex;flex-direction:column;gap:4px;}
+.add-form label{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);font-weight:600;}
+
+/* ---------- agents ---------- */
+.agent-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
+.agent-card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px 18px;}
+.agent-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--blue-soft);color:var(--blue);
+  display:flex;align-items:center;justify-content:center;font-family:'Oswald';font-weight:600;font-size:13px;flex-shrink:0;}
+.agent-name{font-weight:600;font-size:14px;}
+.agent-role{font-size:11.5px;color:var(--ink-soft);}
+.agent-stat{display:flex;justify-content:space-between;font-size:12px;margin-top:6px;color:var(--ink-soft);}
+.agent-stat b{color:var(--ink);font-family:'IBM Plex Mono';}
+
+/* ---------- journal ---------- */
+.journal-entry{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:12px 16px;margin-bottom:10px;}
+.journal-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-soft);margin-bottom:6px;}
+.journal-type{text-transform:uppercase;font-weight:700;letter-spacing:.04em;}
+.journal-text{font-size:13.5px;line-height:1.55;white-space:pre-wrap;}
+
+/* ---------- strategy notes ---------- */
+.notepad{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px 18px;margin-bottom:14px;}
+.notepad h3{font-size:13px;margin-bottom:4px;}
+.notepad p.hint{font-size:11.5px;color:var(--ink-soft);margin:0 0 10px;}
+.save-flag{font-size:10.5px;color:var(--green);opacity:0;transition:opacity .3s;margin-left:8px;}
+.save-flag.show{opacity:1;}
+
+/* ---------- toolbar / search / export ---------- */
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px;}
+.toolbar .search-wrap{position:relative;flex:1;min-width:180px;max-width:280px;}
+.toolbar .search-wrap svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--ink-soft);pointer-events:none;}
+.toolbar input[type="search"]{width:100%;padding-left:30px;}
+.toolbar .spacer{flex:1;}
+.backup-actions{display:flex;gap:8px;flex-wrap:wrap;}
+#import-file{display:none;}
+
+/* ---------- table wrapper (mobile overflow fix) ---------- */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.table-wrap table{min-width:640px;}
+tbody tr.row-expire{background:var(--red-soft);}
+tbody tr.row-expire:hover{background:#F0D5CE;}
+
+/* ---------- KPI sparkline ---------- */
+.kpi-spark{margin-top:8px;height:26px;}
+.kpi-spark svg{display:block;width:100%;height:100%;}
+.kpi-spark .no-data{font-size:10px;color:#C9C4B3;font-style:italic;}
+
+@media (max-width:800px){
+  .app{flex-direction:column;}
+  .sidebar{width:100%;flex-direction:row;overflow-x:auto;padding:12px;}
+  .brand{display:none;}
+  .nav{flex-direction:row;padding:0;}
+  .main{padding:20px 16px 40px;}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <nav class="sidebar">
+    <div class="brand">
+      <div class="stamp-mark">GC</div>
+      <h1>GoCab</h1>
+      <p>Poste de pilotage</p>
+    </div>
+    <div class="nav">
+      <button data-view="dashboard" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Tableau de bord</button>
+      <button data-view="vehicules"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l1.5-4.5A2 2 0 0 1 6.4 7h11.2a2 2 0 0 1 1.9 1.5L21 13"/><rect x="3" y="13" width="18" height="6" rx="1"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>Registre véhicules</button>
+      <button data-view="equipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.5 3-6 6.5-6s6.5 2.5 6.5 6"/><circle cx="17.5" cy="8.5" r="2.6"/><path d="M15 14.2c2.8.4 5 2.6 5 5.8"/></svg>Équipe</button>
+      <button data-view="journal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h11a2 2 0 0 1 2 2v14l-3-2-3 2-3-2-3 2V5a2 2 0 0 1-2-2z"/><path d="M9 8h6M9 12h6"/></svg>Journal et rapports</button>
+      <button data-view="strategie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg>Stratégie</button>
+    </div>
+  </nav>
+
+  <main class="main">
+
+    <!-- ============ DASHBOARD ============ -->
+    <section id="dashboard" class="view active">
+      <div class="topbar">
+        <h2>Tableau de bord</h2>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <span class="date mono" id="today-label"></span>
+          <div class="backup-actions">
+            <button class="btn ghost small" onclick="exportBackup()" title="Télécharger toutes les données en JSON">Exporter les données</button>
+            <button class="btn ghost small" onclick="document.getElementById('import-file').click()" title="Restaurer depuis un fichier JSON">Importer</button>
+            <input type="file" id="import-file" accept="application/json" onchange="importBackup(event)">
+          </div>
+        </div>
+      </div>
+
+      <div class="bar">Indicateurs de performance (KPI)</div>
+      <div class="grid grid-kpi" id="kpi-grid"></div>
+
+      <div class="bar">Alertes documents véhicules</div>
+      <div class="card" style="padding:6px 14px;">
+        <div class="alert-list" id="alert-list"></div>
+      </div>
+    </section>
+
+    <!-- ============ VEHICULES ============ -->
+    <section id="vehicules" class="view">
+      <div class="topbar"><h2>Registre véhicules</h2></div>
+      <div class="bar">Documents véhicules</div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="search" id="veh-search" placeholder="Rechercher plaque ou agent...">
+        </div>
+        <div class="spacer"></div>
+        <button class="btn ghost small" onclick="exportVehiclesCSV()">Exporter CSV</button>
+      </div>
+
+      <div class="filters" id="veh-filters">
+        <button data-f="tous" class="active">Tous</button>
+        <button data-f="valide">Valide</button>
+        <button data-f="renouveler">À renouveler</button>
+        <button data-f="expire">Expiré</button>
+      </div>
+
+      <div id="veh-table-wrap" class="table-wrap"></div>
+
+      <div class="add-form">
+        <h3>Ajouter un document véhicule</h3>
+        <div class="row">
+          <div class="field"><label>Immatriculation</label><input id="v-plate" placeholder="CI 1234 AB" style="width:130px;"></div>
+          <div class="field"><label>Type de document</label>
+            <select id="v-type">
+              <option value="carte_grise">Carte grise</option>
+              <option value="visite_technique">Visite technique</option>
+              <option value="carte_stationnement">Carte de stationnement</option>
+            </select>
+          </div>
+          <div class="field"><label>Échéance</label><input id="v-date" type="date"></div>
+          <div class="field"><label>Agent responsable</label><input id="v-agent" placeholder="Nom de l'agent" style="width:150px;"></div>
+          <button class="btn" onclick="addVehicle()">Ajouter le document</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EQUIPE ============ -->
+    <section id="equipe" class="view">
+      <div class="topbar"><h2>Équipe — Agents de Planification</h2></div>
+      <div class="bar">Suivi des agents</div>
+      <div class="agent-grid" id="agent-grid"></div>
+
+      <div class="add-form">
+        <h3>Ajouter un agent</h3>
+        <div class="row">
+          <div class="field"><label>Nom</label><input id="a-name" placeholder="Nom complet" style="width:160px;"></div>
+          <div class="field"><label>Rôle</label><input id="a-role" placeholder="Agent de planification" style="width:170px;"></div>
+          <div class="field"><label>Tâches réalisées</label><input id="a-done" type="number" min="0" value="0" style="width:80px;"></div>
+          <div class="field"><label>Tâches assignées</label><input id="a-total" type="number" min="0" value="0" style="width:80px;"></div>
+          <div class="field"><label>Absences non justifiées</label><input id="a-abs" type="number" min="0" value="0" style="width:80px;"></div>
+          <button class="btn" onclick="addAgent()">Ajouter l'agent</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ JOURNAL ============ -->
+    <section id="journal" class="view">
+      <div class="topbar"><h2>Journal et rapports</h2></div>
+      <div class="bar">Nouvelle entrée</div>
+      <div class="add-form" style="margin-top:0;">
+        <div class="row" style="margin-bottom:10px;">
+          <div class="field"><label>Type de rapport</label>
+            <select id="j-type">
+              <option value="journalier">Journalier</option>
+              <option value="hebdomadaire">Hebdomadaire</option>
+              <option value="mensuel">Mensuel</option>
+            </select>
+          </div>
+          <div class="field"><label>Date</label><input id="j-date" type="date"></div>
+        </div>
+        <textarea id="j-text" rows="3" placeholder="Points clés, incidents, décisions prises..."></textarea>
+        <div style="margin-top:10px;"><button class="btn" onclick="addJournal()">Enregistrer l'entrée</button></div>
+      </div>
+
+      <div class="bar">Historique</div>
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="search" id="jr-search" placeholder="Rechercher dans les rapports...">
+        </div>
+      </div>
+      <div class="filters" id="jr-filters">
+        <button data-f="tous" class="active">Tous</button>
+        <button data-f="journalier">Journalier</button>
+        <button data-f="hebdomadaire">Hebdomadaire</button>
+        <button data-f="mensuel">Mensuel</button>
+      </div>
+      <div id="journal-list"></div>
+    </section>
+
+    <!-- ============ STRATEGIE ============ -->
+    <section id="strategie" class="view">
+      <div class="topbar"><h2>Stratégie et planification</h2></div>
+      <div class="bar">Notes de pilotage à moyen et long terme</div>
+
+      <div class="notepad">
+        <h3>Anticipation des besoins <span class="save-flag" id="flag-besoins">enregistré</span></h3>
+        <p class="hint">Renouvellement et expansion de la flotte à prévoir.</p>
+        <textarea id="s-besoins" rows="4" placeholder="Ex : anticiper 12 renouvellements de cartes grises pour le T3, prévoir l'ajout de 5 véhicules pour la zone Cocody..."></textarea>
+      </div>
+      <div class="notepad">
+        <h3>Axes d'optimisation <span class="save-flag" id="flag-axes">enregistré</span></h3>
+        <p class="hint">Analyse des KPI et pistes d'amélioration du service.</p>
+        <textarea id="s-axes" rows="4" placeholder="Ex : automatiser les rappels d'échéance, réduire le délai moyen de résolution des pièces manquantes..."></textarea>
+      </div>
+      <div class="notepad">
+        <h3>Budget prévisionnel <span class="save-flag" id="flag-budget">enregistré</span></h3>
+        <p class="hint">Budgets à soumettre pour les activités planifiées.</p>
+        <textarea id="s-budget" rows="4" placeholder="Ex : budget visites techniques T3 — estimation..."></textarea>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ---------------- state ---------------- */
+let vehicles = [];
+let agents = [];
+let kpis = {};
+let journal = [];
+let strategy = {besoins:'', axes:'', budget:''};
+let vehFilter = 'tous';
+let jrFilter = 'tous';
+let vehSearch = '';
+let jrSearch = '';
+
+function todayKey(){ const d=new Date(); return d.toISOString().slice(0,7); }
+function todayISO(){ return new Date().toISOString().slice(0,10); }
+
+function defaultKpis(){
+  return {
+    valide:    {label:"Documents véhicules valides à jour", type:"percent", target:100, freq:"Mensuel", history:{}},
+    retards:   {label:"Anticipation des renouvellements", type:"zero", unit:"retard", target:0, freq:"Mensuel", history:{}},
+    resolution:{label:"Résolution des pièces / documents manquants", type:"percent", target:95, freq:"Mensuel", history:{}},
+    objectifs: {label:"Atteinte des objectifs des Agents", type:"percent", target:85, freq:"Mensuel", history:{}},
+    discipline:{label:"Ponctualité, assiduité et discipline", type:"zero", unit:"absence non justifiée", target:0, freq:"Continu", history:{}}
+  };
+}
+
+/* ---------------- storage helpers ---------------- */
+async function loadKey(key, fallback){
+  try{
+    const r = await window.storage.get(key, false);
+    return r ? JSON.parse(r.value) : fallback;
+  }catch(e){ return fallback; }
+}
+async function saveKey(key, value){
+  try{ await window.storage.set(key, JSON.stringify(value), false); }
+  catch(e){ console.error('Erreur de sauvegarde', key, e); }
+}
+
+async function loadAll(){
+  vehicles = await loadKey('gocab:vehicles', []);
+  agents   = await loadKey('gocab:agents', []);
+  kpis     = await loadKey('gocab:kpis', defaultKpis());
+  journal  = await loadKey('gocab:journal', []);
+  strategy = await loadKey('gocab:strategy', {besoins:'', axes:'', budget:''});
+
+  document.getElementById('s-besoins').value = strategy.besoins || '';
+  document.getElementById('s-axes').value = strategy.axes || '';
+  document.getElementById('s-budget').value = strategy.budget || '';
+  document.getElementById('j-date').value = todayISO();
+
+  renderKpis();
+  renderAlerts();
+  renderVehicles();
+  renderAgents();
+  renderJournal();
+}
+
+/* ---------------- nav ---------------- */
+document.querySelectorAll('.nav button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.view).classList.add('active');
+  });
+});
+
+const todayLabelEl = document.getElementById('today-label');
+{
+  const raw = new Date().toLocaleDateString('fr-FR', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+  todayLabelEl.textContent = raw.charAt(0).toUpperCase() + raw.slice(1);
+}
+
+/* ---------------- KPI ---------------- */
+function renderKpis(){
+  const grid = document.getElementById('kpi-grid');
+  grid.innerHTML = '';
+  const mk = todayKey();
+  Object.entries(kpis).forEach(([id, k])=>{
+    const val = k.history[mk];
+    const card = document.createElement('div');
+    card.className = 'card';
+    let barHtml = '', valueHtml, statusColor;
+
+    if(k.type === 'percent'){
+      const v = (val===undefined || val===null) ? null : val;
+      const pct = v===null ? 0 : Math.min(100, Math.max(0, v));
+      statusColor = v===null ? '#C9C4B3' : (v>=k.target ? 'var(--green)' : (v>=k.target-15 ? 'var(--amber)' : 'var(--red)'));
+      valueHtml = v===null ? '—' : (Math.round(v*10)/10)+'%';
+      barHtml = `<div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${statusColor};"></div></div>`;
+    } else {
+      const v = (val===undefined || val===null) ? null : val;
+      statusColor = v===null ? '#C9C4B3' : (v<=k.target ? 'var(--green)' : 'var(--red)');
+      valueHtml = v===null ? '—' : Math.round(v);
+    }
+
+    card.innerHTML = `
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-row">
+        <span class="kpi-value" style="color:${statusColor}">${valueHtml}</span>
+        <span class="kpi-target">/ objectif ${k.type==='percent' ? k.target+'%' : (k.target+' '+(k.unit||''))}</span>
+      </div>
+      ${barHtml}
+      <div class="kpi-spark">${sparklineSvg(k)}</div>
+      <div class="kpi-freq">${k.freq}</div>
+      <div class="kpi-input">
+        <input type="number" step="0.1" placeholder="valeur ce mois" id="kpi-in-${id}" value="${val ?? ''}">
+        <button class="btn small ghost" onclick="updateKpi('${id}')">Mettre à jour</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+function sparklineSvg(k){
+  const months = Object.keys(k.history).sort().slice(-6);
+  if(months.length < 2) return '<span class="no-data">Historique insuffisant pour la tendance</span>';
+  const vals = months.map(m=>k.history[m]);
+  const min = Math.min(...vals, k.target);
+  const max = Math.max(...vals, k.target);
+  const range = (max - min) || 1;
+  const w = 100, h = 24, pad = 2;
+  const pts = vals.map((v,i)=>{
+    const x = pad + (i/(vals.length-1)) * (w-2*pad);
+    const y = h - pad - ((v-min)/range) * (h-2*pad);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+  const good = k.type==='percent' ? vals[vals.length-1] >= k.target : vals[vals.length-1] <= k.target;
+  const color = good ? 'var(--green)' : 'var(--amber)';
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <polyline points="${pts.join(' ')}" fill="none" stroke="${color}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="${pts[pts.length-1].split(',')[0]}" cy="${pts[pts.length-1].split(',')[1]}" r="2" fill="${color}"/>
+  </svg>`;
+}
+async function updateKpi(id){
+  const input = document.getElementById('kpi-in-'+id);
+  const v = parseFloat(input.value);
+  if(isNaN(v)) return;
+  kpis[id].history[todayKey()] = v;
+  await saveKey('gocab:kpis', kpis);
+  renderKpis();
+}
+
+/* ---------------- vehicles ---------------- */
+function daysUntil(dateStr){
+  const d = new Date(dateStr+'T00:00:00');
+  const t = new Date(); t.setHours(0,0,0,0);
+  return Math.round((d-t)/86400000);
+}
+function statusFor(days){
+  if(days<0) return 'expire';
+  if(days<=30) return 'renouveler';
+  return 'valide';
+}
+function statusLabel(s){
+  return s==='expire' ? 'Expiré' : s==='renouveler' ? 'À renouveler' : 'Valide';
+}
+const docLabels = {carte_grise:'Carte grise', visite_technique:'Visite technique', carte_stationnement:'Carte de stationnement'};
+
+function renderVehicles(){
+  const wrap = document.getElementById('veh-table-wrap');
+  let list = vehicles.map(v=>({...v, days:daysUntil(v.dueDate), status:statusFor(daysUntil(v.dueDate))}));
+  if(vehFilter !== 'tous') list = list.filter(v=>v.status===vehFilter);
+  if(vehSearch){
+    const q = vehSearch.toLowerCase();
+    list = list.filter(v=>(v.plate||'').toLowerCase().includes(q) || (v.agent||'').toLowerCase().includes(q));
+  }
+  list.sort((a,b)=>a.days-b.days);
+
+  if(vehicles.length===0){
+    wrap.innerHTML = `<div class="card empty"><b>Aucun véhicule enregistré</b>Ajoutez le premier document véhicule ci-dessous pour démarrer le suivi.</div>`;
+    return;
+  }
+  if(list.length===0){
+    wrap.innerHTML = `<div class="card empty"><b>Aucun résultat</b>Essayez un autre filtre ou une autre recherche.</div>`;
+    return;
+  }
+
+  let rows = list.map(v=>`
+    <tr class="${v.status==='expire' ? 'row-expire' : ''}">
+      <td class="plate">${v.plate}</td>
+      <td>${docLabels[v.docType]||v.docType}</td>
+      <td class="mono">${new Date(v.dueDate+'T00:00:00').toLocaleDateString('fr-FR')}</td>
+      <td class="mono">${v.days<0 ? 'dépassé de '+Math.abs(v.days)+'j' : v.days+' j'}</td>
+      <td>${v.agent || '—'}</td>
+      <td><span class="stamp ${v.status}">${statusLabel(v.status)}</span></td>
+      <td class="actions-cell">
+        <button class="icon-btn" title="Renouveler (repousser d'1 an)" onclick="renewVehicle('${v.id}')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+        </button>
+        <button class="icon-btn" title="Supprimer" onclick="deleteVehicle('${v.id}')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>
+        </button>
+      </td>
+    </tr>`).join('');
+
+  wrap.innerHTML = `
+    <table>
+      <thead><tr><th>Immatriculation</th><th>Document</th><th>Échéance</th><th>Délai</th><th>Agent</th><th>Statut</th><th></th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+document.querySelectorAll('#veh-filters button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('#veh-filters button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    vehFilter = b.dataset.f;
+    renderVehicles();
+  });
+});
+document.getElementById('veh-search').addEventListener('input', (e)=>{
+  vehSearch = e.target.value.trim();
+  renderVehicles();
+});
+
+function csvEscape(val){
+  const s = String(val ?? '');
+  return /[",;\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s;
+}
+function downloadFile(filename, content, mime){
+  const blob = new Blob([content], {type:mime});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+function exportVehiclesCSV(){
+  let list = vehicles.map(v=>({...v, days:daysUntil(v.dueDate), status:statusFor(daysUntil(v.dueDate))}));
+  if(vehFilter !== 'tous') list = list.filter(v=>v.status===vehFilter);
+  if(vehSearch){
+    const q = vehSearch.toLowerCase();
+    list = list.filter(v=>(v.plate||'').toLowerCase().includes(q) || (v.agent||'').toLowerCase().includes(q));
+  }
+  if(list.length===0){ alert('Aucune donnée à exporter pour ce filtre.'); return; }
+  const header = ['Immatriculation','Document','Échéance','Délai (jours)','Agent','Statut'];
+  const rows = list.map(v=>[
+    csvEscape(v.plate), csvEscape(docLabels[v.docType]||v.docType), csvEscape(v.dueDate),
+    csvEscape(v.days), csvEscape(v.agent||''), csvEscape(statusLabel(v.status))
+  ].join(';'));
+  const csv = '\uFEFF' + [header.join(';'), ...rows].join('\n');
+  downloadFile(`gocab_vehicules_${todayISO()}.csv`, csv, 'text/csv;charset=utf-8');
+}
+
+async function addVehicle(){
+  const plate = document.getElementById('v-plate').value.trim();
+  const type = document.getElementById('v-type').value;
+  const date = document.getElementById('v-date').value;
+  const agent = document.getElementById('v-agent').value.trim();
+  if(!plate || !date){ alert('Renseignez au minimum l\'immatriculation et la date d\'échéance.'); return; }
+  vehicles.push({id:'v'+Date.now(), plate, docType:type, dueDate:date, agent});
+  await saveKey('gocab:vehicles', vehicles);
+  document.getElementById('v-plate').value='';
+  document.getElementById('v-date').value='';
+  document.getElementById('v-agent').value='';
+  renderVehicles();
+  renderAlerts();
+}
+async function deleteVehicle(id){
+  const v = vehicles.find(v=>v.id===id);
+  if(!confirm(`Supprimer le document ${v ? v.plate : ''} ? Cette action est irréversible.`)) return;
+  vehicles = vehicles.filter(v=>v.id!==id);
+  await saveKey('gocab:vehicles', vehicles);
+  renderVehicles();
+  renderAlerts();
+}
+async function renewVehicle(id){
+  const v = vehicles.find(v=>v.id===id);
+  if(!v) return;
+  const d = new Date(v.dueDate+'T00:00:00');
+  d.setFullYear(d.getFullYear()+1);
+  v.dueDate = d.toISOString().slice(0,10);
+  await saveKey('gocab:vehicles', vehicles);
+  renderVehicles();
+  renderAlerts();
+}
+
+/* ---------------- alerts (dashboard) ---------------- */
+function renderAlerts(){
+  const box = document.getElementById('alert-list');
+  let list = vehicles.map(v=>({...v, days:daysUntil(v.dueDate)})).filter(v=>v.days<=30);
+  list.sort((a,b)=>a.days-b.days);
+  if(list.length===0){
+    box.innerHTML = `<div class="empty"><b>Aucune échéance proche</b>Tous les documents véhicules ont une marge de plus de 30 jours.</div>`;
+    return;
+  }
+  box.innerHTML = list.map(v=>`
+    <div class="alert-row">
+      <div>
+        <span class="plate mono">${v.plate}</span> — ${docLabels[v.docType]||v.docType}
+        <div class="who">${v.agent ? 'Agent : '+v.agent : 'Aucun agent assigné'}</div>
+      </div>
+      <span class="stamp ${statusFor(v.days)}">${v.days<0 ? 'Dépassé '+Math.abs(v.days)+'j' : v.days+' j restants'}</span>
+    </div>`).join('');
+}
+
+/* ---------------- agents ---------------- */
+function initials(name){
+  return name.split(' ').filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join('');
+}
+function renderAgents(){
+  const grid = document.getElementById('agent-grid');
+  if(agents.length===0){
+    grid.innerHTML = `<div class="card empty" style="grid-column:1/-1;"><b>Aucun agent enregistré</b>Ajoutez votre équipe de planification ci-dessous.</div>`;
+    return;
+  }
+  grid.innerHTML = agents.map(a=>{
+    const pct = a.total>0 ? Math.round((a.done/a.total)*100) : 0;
+    const color = pct>=85 ? 'var(--green)' : pct>=60 ? 'var(--amber)' : 'var(--red)';
+    return `
+    <div class="agent-card">
+      <div class="agent-head">
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div class="avatar">${initials(a.name)}</div>
+          <div><div class="agent-name">${a.name}</div><div class="agent-role">${a.role||'Agent de planification'}</div></div>
+        </div>
+        <button class="icon-btn" title="Supprimer" onclick="deleteAgent('${a.id}')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>
+        </button>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color};"></div></div>
+      <div class="agent-stat"><span>Tâches réalisées</span><b>${a.done} / ${a.total}</b></div>
+      <div class="agent-stat"><span>Absences non justifiées</span><b style="color:${a.abs>0?'var(--red)':'var(--green)'}">${a.abs}</b></div>
+    </div>`;
+  }).join('');
+}
+async function addAgent(){
+  const name = document.getElementById('a-name').value.trim();
+  const role = document.getElementById('a-role').value.trim();
+  const done = parseInt(document.getElementById('a-done').value)||0;
+  const total = parseInt(document.getElementById('a-total').value)||0;
+  const abs = parseInt(document.getElementById('a-abs').value)||0;
+  if(!name){ alert('Renseignez le nom de l\'agent.'); return; }
+  agents.push({id:'a'+Date.now(), name, role, done, total, abs});
+  await saveKey('gocab:agents', agents);
+  document.getElementById('a-name').value='';
+  document.getElementById('a-role').value='';
+  document.getElementById('a-done').value=0;
+  document.getElementById('a-total').value=0;
+  document.getElementById('a-abs').value=0;
+  renderAgents();
+}
+async function deleteAgent(id){
+  const a = agents.find(a=>a.id===id);
+  if(!confirm(`Supprimer l'agent ${a ? a.name : ''} ? Cette action est irréversible.`)) return;
+  agents = agents.filter(a=>a.id!==id);
+  await saveKey('gocab:agents', agents);
+  renderAgents();
+}
+
+/* ---------------- journal ---------------- */
+function renderJournal(){
+  const box = document.getElementById('journal-list');
+  let list = journal.slice();
+  if(jrFilter!=='tous') list = list.filter(j=>j.type===jrFilter);
+  if(jrSearch){
+    const q = jrSearch.toLowerCase();
+    list = list.filter(j=>j.text.toLowerCase().includes(q));
+  }
+  list.sort((a,b)=> b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
+  if(journal.length===0){
+    box.innerHTML = `<div class="card empty"><b>Aucune entrée</b>Ajoutez un rapport journalier, hebdomadaire ou mensuel ci-dessus.</div>`;
+    return;
+  }
+  if(list.length===0){
+    box.innerHTML = `<div class="card empty"><b>Aucun résultat</b>Essayez un autre filtre ou une autre recherche.</div>`;
+    return;
+  }
+  box.innerHTML = list.map(j=>`
+    <div class="journal-entry">
+      <div class="journal-meta">
+        <span class="journal-type">${j.type}</span>
+        <span class="mono">${new Date(j.date+'T00:00:00').toLocaleDateString('fr-FR')}</span>
+      </div>
+      <div class="journal-text">${j.text.replace(/</g,'&lt;')}</div>
+    </div>`).join('');
+}
+document.querySelectorAll('#jr-filters button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('#jr-filters button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    jrFilter = b.dataset.f;
+    renderJournal();
+  });
+});
+document.getElementById('jr-search').addEventListener('input', (e)=>{
+  jrSearch = e.target.value.trim();
+  renderJournal();
+});
+async function addJournal(){
+  const type = document.getElementById('j-type').value;
+  const date = document.getElementById('j-date').value || todayISO();
+  const text = document.getElementById('j-text').value.trim();
+  if(!text){ alert('Écrivez le contenu du rapport avant d\'enregistrer.'); return; }
+  journal.push({id:'j'+Date.now(), type, date, text});
+  await saveKey('gocab:journal', journal);
+  document.getElementById('j-text').value='';
+  renderJournal();
+}
+
+/* ---------------- strategy notes (autosave) ---------------- */
+function wireNote(fieldId, key, flagId){
+  const el = document.getElementById(fieldId);
+  let t;
+  el.addEventListener('input', ()=>{
+    clearTimeout(t);
+    t = setTimeout(async ()=>{
+      strategy[key] = el.value;
+      await saveKey('gocab:strategy', strategy);
+      const flag = document.getElementById(flagId);
+      flag.classList.add('show');
+      setTimeout(()=>flag.classList.remove('show'), 1500);
+    }, 600);
+  });
+}
+wireNote('s-besoins','besoins','flag-besoins');
+wireNote('s-axes','axes','flag-axes');
+wireNote('s-budget','budget','flag-budget');
+
+/* ---------------- backup export / import ---------------- */
+function exportBackup(){
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    vehicles, agents, kpis, journal, strategy
+  };
+  downloadFile(`gocab_sauvegarde_${todayISO()}.json`, JSON.stringify(payload, null, 2), 'application/json');
+}
+async function importBackup(evt){
+  const file = evt.target.files[0];
+  if(!file) return;
+  try{
+    const text = await file.text();
+    const data = JSON.parse(text);
+    if(!data || typeof data !== 'object') throw new Error('Format invalide');
+    if(!confirm('Importer ce fichier remplacera toutes les données actuelles (véhicules, équipe, KPI, journal, stratégie). Continuer ?')) {
+      evt.target.value = '';
+      return;
+    }
+    vehicles = Array.isArray(data.vehicles) ? data.vehicles : vehicles;
+    agents   = Array.isArray(data.agents)   ? data.agents   : agents;
+    kpis     = data.kpis && typeof data.kpis==='object' ? data.kpis : kpis;
+    journal  = Array.isArray(data.journal)  ? data.journal  : journal;
+    strategy = data.strategy && typeof data.strategy==='object' ? data.strategy : strategy;
+
+    await saveKey('gocab:vehicles', vehicles);
+    await saveKey('gocab:agents', agents);
+    await saveKey('gocab:kpis', kpis);
+    await saveKey('gocab:journal', journal);
+    await saveKey('gocab:strategy', strategy);
+
+    document.getElementById('s-besoins').value = strategy.besoins || '';
+    document.getElementById('s-axes').value = strategy.axes || '';
+    document.getElementById('s-budget').value = strategy.budget || '';
+
+    renderKpis(); renderAlerts(); renderVehicles(); renderAgents(); renderJournal();
+    alert('Import terminé avec succès.');
+  }catch(e){
+    alert("Le fichier n'a pas pu être importé : format invalide.");
+  }finally{
+    evt.target.value = '';
+  }
+}
+
+['v-plate','v-date','v-agent'].forEach(id=>{
+  document.getElementById(id).addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); addVehicle(); } });
+});
+['a-name','a-role','a-done','a-total','a-abs'].forEach(id=>{
+  document.getElementById(id).addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); addAgent(); } });
+});
+
+loadAll();
+</script>
+</body>
+</html>
