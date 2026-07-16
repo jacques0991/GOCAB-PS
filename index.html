@@ -96,6 +96,11 @@ input,select,textarea{
 }
 input:focus,select:focus,textarea:focus{outline:2px solid var(--gold-soft);border-color:var(--gold);}
 textarea{width:100%;resize:vertical;font-family:'Public Sans';line-height:1.5;}
+input[type="file"]{
+  font-family:'Public Sans',sans-serif;font-size:12px;border:1px dashed var(--line);
+  border-radius:4px;padding:5px 8px;background:#FDFCF9;color:var(--ink-soft);cursor:pointer;
+}
+input[type="file"]:hover{background:var(--gold-soft);border-color:var(--gold);color:var(--ink);}
 button.btn{
   font-family:'Public Sans';font-size:12.5px;font-weight:600;border:1px solid var(--ink);
   background:var(--ink);color:#fff;padding:8px 14px;border-radius:4px;cursor:pointer;
@@ -279,6 +284,7 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
         <h3>Ajouter un document véhicule</h3>
         <div class="row">
           <div class="field"><label>Immatriculation</label><input id="v-plate" placeholder="CI 1234 AB" style="width:130px;"></div>
+          <div class="field"><label>N° Châssis</label><input id="v-chassis" placeholder="Ex: VF3..." style="width:130px;"></div>
           <div class="field"><label>Type de document</label>
             <select id="v-type">
               <option value="carte_grise">Carte grise</option>
@@ -287,7 +293,9 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
             </select>
           </div>
           <div class="field"><label>Échéance</label><input id="v-date" type="date"></div>
-          <div class="field"><label>Agent responsable</label><input id="v-agent" placeholder="Nom de l'agent" style="width:150px;"></div>
+          <div class="field"><label>Temps d'interpellation</label><input id="v-interpellation" placeholder="Ex: 15 min" style="width:130px;"></div>
+          <div class="field"><label>Agent responsable</label><input id="v-agent" placeholder="Nom de l'agent" style="width:140px;"></div>
+          <div class="field"><label>Document (PDF, Word, Excel, PPT)</label><input id="v-file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpg,.jpeg" style="width:180px;"></div>
           <button class="btn" onclick="addVehicle()">Ajouter le document</button>
         </div>
       </div>
@@ -400,12 +408,23 @@ function defaultKpis(){
 /* ---------------- storage helpers ---------------- */
 async function loadKey(key, fallback){
   try{
-    const r = await window.storage.get(key, false);
-    return r ? JSON.parse(r.value) : fallback;
+    if (window.storage && typeof window.storage.get === 'function') {
+      const r = await window.storage.get(key, false);
+      return r ? JSON.parse(r.value) : fallback;
+    } else {
+      const r = localStorage.getItem(key);
+      return r ? JSON.parse(r) : fallback;
+    }
   }catch(e){ return fallback; }
 }
 async function saveKey(key, value){
-  try{ await window.storage.set(key, JSON.stringify(value), false); }
+  try{
+    if (window.storage && typeof window.storage.set === 'function') {
+      await window.storage.set(key, JSON.stringify(value), false);
+    } else {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+  }
   catch(e){ console.error('Erreur de sauvegarde', key, e); }
 }
 
@@ -535,7 +554,9 @@ function renderVehicles(){
   if(vehFilter !== 'tous') list = list.filter(v=>v.status===vehFilter);
   if(vehSearch){
     const q = vehSearch.toLowerCase();
-    list = list.filter(v=>(v.plate||'').toLowerCase().includes(q) || (v.agent||'').toLowerCase().includes(q));
+    list = list.filter(v=>(v.plate||'').toLowerCase().includes(q) || 
+                          (v.agent||'').toLowerCase().includes(q) ||
+                          (v.chassis||'').toLowerCase().includes(q));
   }
   list.sort((a,b)=>a.days-b.days);
 
@@ -551,10 +572,24 @@ function renderVehicles(){
   let rows = list.map(v=>`
     <tr class="${v.status==='expire' ? 'row-expire' : ''}">
       <td class="plate">${v.plate}</td>
+      <td class="mono" style="font-size:11.5px;">${v.chassis || '—'}</td>
       <td>${docLabels[v.docType]||v.docType}</td>
       <td class="mono">${new Date(v.dueDate+'T00:00:00').toLocaleDateString('fr-FR')}</td>
       <td class="mono">${v.days<0 ? 'dépassé de '+Math.abs(v.days)+'j' : v.days+' j'}</td>
+      <td>${v.interpellationTime || '—'}</td>
       <td>${v.agent || '—'}</td>
+      <td>
+        ${v.fileData ? `
+          <button class="icon-btn" title="Télécharger ${v.fileName}" onclick="downloadVehicleFile('${v.id}')" style="color:var(--blue); display:inline-flex; align-items:center; gap:4px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span style="font-size:11px; max-width:80px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" class="mono">${v.fileName}</span>
+          </button>
+        ` : '—'}
+      </td>
       <td><span class="stamp ${v.status}">${statusLabel(v.status)}</span></td>
       <td class="actions-cell">
         <button class="icon-btn" title="Renouveler (repousser d'1 an)" onclick="renewVehicle('${v.id}')">
@@ -568,7 +603,20 @@ function renderVehicles(){
 
   wrap.innerHTML = `
     <table>
-      <thead><tr><th>Immatriculation</th><th>Document</th><th>Échéance</th><th>Délai</th><th>Agent</th><th>Statut</th><th></th></tr></thead>
+      <thead>
+        <tr>
+          <th>Immatriculation</th>
+          <th>N° Châssis</th>
+          <th>Document</th>
+          <th>Échéance</th>
+          <th>Délai</th>
+          <th>Temps d'interpellation</th>
+          <th>Agent</th>
+          <th>Fichier</th>
+          <th>Statut</th>
+          <th></th>
+        </tr>
+      </thead>
       <tbody>${rows}</tbody>
     </table>`;
 }
@@ -603,16 +651,38 @@ function exportVehiclesCSV(){
   if(vehFilter !== 'tous') list = list.filter(v=>v.status===vehFilter);
   if(vehSearch){
     const q = vehSearch.toLowerCase();
-    list = list.filter(v=>(v.plate||'').toLowerCase().includes(q) || (v.agent||'').toLowerCase().includes(q));
+    list = list.filter(v=>(v.plate||'').toLowerCase().includes(q) || 
+                          (v.agent||'').toLowerCase().includes(q) ||
+                          (v.chassis||'').toLowerCase().includes(q));
   }
   if(list.length===0){ alert('Aucune donnée à exporter pour ce filtre.'); return; }
-  const header = ['Immatriculation','Document','Échéance','Délai (jours)','Agent','Statut'];
+  const header = ['Immatriculation','N° Châssis','Document','Échéance','Délai (jours)','Temps d\'interpellation','Agent','Nom du fichier','Statut'];
   const rows = list.map(v=>[
-    csvEscape(v.plate), csvEscape(docLabels[v.docType]||v.docType), csvEscape(v.dueDate),
-    csvEscape(v.days), csvEscape(v.agent||''), csvEscape(statusLabel(v.status))
+    csvEscape(v.plate), csvEscape(v.chassis||''), csvEscape(docLabels[v.docType]||v.docType), csvEscape(v.dueDate),
+    csvEscape(v.days), csvEscape(v.interpellationTime||''), csvEscape(v.agent||''), csvEscape(v.fileName||''), csvEscape(statusLabel(v.status))
   ].join(';'));
   const csv = '\uFEFF' + [header.join(';'), ...rows].join('\n');
   downloadFile(`gocab_vehicules_${todayISO()}.csv`, csv, 'text/csv;charset=utf-8');
+}
+
+function readFileAsBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+    reader.readAsDataURL(file);
+  });
+}
+
+function downloadVehicleFile(id) {
+  const v = vehicles.find(item => item.id === id);
+  if (!v || !v.fileData) return;
+  const a = document.createElement('a');
+  a.href = v.fileData;
+  a.download = v.fileName || 'document';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 }
 
 async function addVehicle(){
@@ -620,12 +690,50 @@ async function addVehicle(){
   const type = document.getElementById('v-type').value;
   const date = document.getElementById('v-date').value;
   const agent = document.getElementById('v-agent').value.trim();
+  const chassis = document.getElementById('v-chassis').value.trim();
+  const interpellation = document.getElementById('v-interpellation').value.trim();
+  const fileInput = document.getElementById('v-file');
+
   if(!plate || !date){ alert('Renseignez au minimum l\'immatriculation et la date d\'échéance.'); return; }
-  vehicles.push({id:'v'+Date.now(), plate, docType:type, dueDate:date, agent});
+
+  let fileData = null;
+  let fileName = null;
+  let fileType = null;
+
+  if (fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+    fileName = file.name;
+    fileType = file.type;
+    try {
+      fileData = await readFileAsBase64(file);
+    } catch(e) {
+      alert("Erreur lors de la lecture du fichier.");
+      return;
+    }
+  }
+
+  vehicles.push({
+    id:'v'+Date.now(), 
+    plate, 
+    chassis, 
+    docType:type, 
+    dueDate:date, 
+    interpellationTime:interpellation, 
+    agent,
+    fileData,
+    fileName,
+    fileType
+  });
+
   await saveKey('gocab:vehicles', vehicles);
+
   document.getElementById('v-plate').value='';
+  document.getElementById('v-chassis').value='';
   document.getElementById('v-date').value='';
+  document.getElementById('v-interpellation').value='';
   document.getElementById('v-agent').value='';
+  fileInput.value = '';
+
   renderVehicles();
   renderAlerts();
 }
@@ -828,13 +936,17 @@ async function importBackup(evt){
     renderKpis(); renderAlerts(); renderVehicles(); renderAgents(); renderJournal();
     alert('Import terminé avec succès.');
   }catch(e){
-    alert("Le fichier n'a pas pu être importé : format invalide.");
+    if (file && file.name && file.name.match(/\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$/i)) {
+      alert("Ce bouton « Importer » sert uniquement à restaurer une sauvegarde globale au format JSON.\n\nPour joindre un document PDF, Word, Excel ou PowerPoint à un véhicule, veuillez utiliser le formulaire en bas de l'onglet « Registre véhicules ».");
+    } else {
+      alert("Le fichier n'a pas pu être importé : format invalide.");
+    }
   }finally{
     evt.target.value = '';
   }
 }
 
-['v-plate','v-date','v-agent'].forEach(id=>{
+['v-plate','v-chassis','v-date','v-interpellation','v-agent'].forEach(id=>{
   document.getElementById(id).addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); addVehicle(); } });
 });
 ['a-name','a-role','a-done','a-total','a-abs'].forEach(id=>{
