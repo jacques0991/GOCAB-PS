@@ -291,6 +291,8 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
               <option value="carte_grise">Carte grise</option>
               <option value="visite_technique">Visite technique</option>
               <option value="carte_stationnement">Carte de stationnement</option>
+              <option value="patente">Patente</option>
+              <option value="assurance">Assurance</option>
             </select>
           </div>
           <div class="field"><label>Échéance</label><input id="v-date" type="date"></div>
@@ -582,7 +584,13 @@ function statusFor(days){
 function statusLabel(s){
   return s==='expire' ? 'Expiré' : s==='renouveler' ? 'À renouveler' : 'Valide';
 }
-const docLabels = {carte_grise:'Carte grise', visite_technique:'Visite technique', carte_stationnement:'Carte de stationnement'};
+const docLabels = {
+  carte_grise: 'Carte grise',
+  visite_technique: 'Visite technique',
+  carte_stationnement: 'Carte de stationnement',
+  patente: 'Patente',
+  assurance: 'Assurance'
+};
 
 function renderVehicles(){
   const wrap = document.getElementById('veh-table-wrap');
