@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GoCab — Poste de Pilotage</title>
+<title>GoCab â€” Poste de Pilotage</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
@@ -225,10 +225,11 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
     </div>
     <div class="nav">
       <button data-view="dashboard" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Tableau de bord</button>
-      <button data-view="vehicules"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l1.5-4.5A2 2 0 0 1 6.4 7h11.2a2 2 0 0 1 1.9 1.5L21 13"/><rect x="3" y="13" width="18" height="6" rx="1"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>Registre véhicules</button>
-      <button data-view="equipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.5 3-6 6.5-6s6.5 2.5 6.5 6"/><circle cx="17.5" cy="8.5" r="2.6"/><path d="M15 14.2c2.8.4 5 2.6 5 5.8"/></svg>Équipe</button>
+      <button data-view="vehicules"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l1.5-4.5A2 2 0 0 1 6.4 7h11.2a2 2 0 0 1 1.9 1.5L21 13"/><rect x="3" y="13" width="18" height="6" rx="1"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>Registre vÃ©hicules</button>
+      <button data-view="flotte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>Flotte vÃ©hicules</button>
+      <button data-view="equipe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.5 3-6 6.5-6s6.5 2.5 6.5 6"/><circle cx="17.5" cy="8.5" r="2.6"/><path d="M15 14.2c2.8.4 5 2.6 5 5.8"/></svg>Ã‰quipe</button>
       <button data-view="journal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h11a2 2 0 0 1 2 2v14l-3-2-3 2-3-2-3 2V5a2 2 0 0 1-2-2z"/><path d="M9 8h6M9 12h6"/></svg>Journal et rapports</button>
-      <button data-view="strategie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg>Stratégie</button>
+      <button data-view="strategie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg>StratÃ©gie</button>
     </div>
   </nav>
 
@@ -241,7 +242,7 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
         <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
           <span class="date mono" id="today-label"></span>
           <div class="backup-actions">
-            <button class="btn ghost small" onclick="exportBackup()" title="Télécharger toutes les données en JSON">Exporter les données</button>
+            <button class="btn ghost small" onclick="exportBackup()" title="TÃ©lÃ©charger toutes les donnÃ©es en JSON">Exporter les donnÃ©es</button>
             <button class="btn ghost small" onclick="document.getElementById('import-file').click()" title="Restaurer depuis un fichier JSON">Importer</button>
             <input type="file" id="import-file" accept="application/json" onchange="importBackup(event)">
           </div>
@@ -251,7 +252,7 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
       <div class="bar">Indicateurs de performance (KPI)</div>
       <div class="grid grid-kpi" id="kpi-grid"></div>
 
-      <div class="bar">Alertes documents véhicules</div>
+      <div class="bar">Alertes documents vÃ©hicules</div>
       <div class="card" style="padding:6px 14px;">
         <div class="alert-list" id="alert-list"></div>
       </div>
@@ -259,8 +260,8 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
 
     <!-- ============ VEHICULES ============ -->
     <section id="vehicules" class="view">
-      <div class="topbar"><h2>Registre véhicules</h2></div>
-      <div class="bar">Documents véhicules</div>
+      <div class="topbar"><h2>Registre vÃ©hicules</h2></div>
+      <div class="bar">Documents vÃ©hicules</div>
 
       <div class="toolbar">
         <div class="search-wrap">
@@ -274,17 +275,17 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
       <div class="filters" id="veh-filters">
         <button data-f="tous" class="active">Tous</button>
         <button data-f="valide">Valide</button>
-        <button data-f="renouveler">À renouveler</button>
-        <button data-f="expire">Expiré</button>
+        <button data-f="renouveler">Ã€ renouveler</button>
+        <button data-f="expire">ExpirÃ©</button>
       </div>
 
       <div id="veh-table-wrap" class="table-wrap"></div>
 
       <div class="add-form">
-        <h3>Ajouter un document véhicule</h3>
+        <h3>Ajouter un document vÃ©hicule</h3>
         <div class="row">
-          <div class="field"><label>Immatriculation</label><input id="v-plate" placeholder="CI 1234 AB" style="width:130px;"></div>
-          <div class="field"><label>N° Châssis</label><input id="v-chassis" placeholder="Ex: VF3..." style="width:130px;"></div>
+          <div class="field"><label>Immatriculation</label><input id="v-plate" list="datalist-plates" placeholder="CI 1234 AB" style="width:130px;"></div>
+          <div class="field"><label>NÂ° ChÃ¢ssis</label><input id="v-chassis" placeholder="Ex: VF3..." style="width:130px;"></div>
           <div class="field"><label>Type de document</label>
             <select id="v-type">
               <option value="carte_grise">Carte grise</option>
@@ -292,7 +293,7 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
               <option value="carte_stationnement">Carte de stationnement</option>
             </select>
           </div>
-          <div class="field"><label>Échéance</label><input id="v-date" type="date"></div>
+          <div class="field"><label>Ã‰chÃ©ance</label><input id="v-date" type="date"></div>
           <div class="field"><label>Temps d'interpellation</label><input id="v-interpellation" placeholder="Ex: 15 min" style="width:130px;"></div>
           <div class="field"><label>Agent responsable</label><input id="v-agent" placeholder="Nom de l'agent" style="width:140px;"></div>
           <div class="field"><label>Document (PDF, Word, Excel, PPT)</label><input id="v-file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpg,.jpeg" style="width:180px;"></div>
@@ -301,9 +302,36 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
       </div>
     </section>
 
+    <!-- ============ FLOTTE ============ -->
+    <section id="flotte" class="view">
+      <div class="topbar"><h2>Flotte vÃ©hicules (Base de donnÃ©es)</h2></div>
+      <div class="bar">Liste des vÃ©hicules de la flotte</div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="search" id="flotte-search" placeholder="Rechercher immatriculation, chÃ¢ssis ou modÃ¨le...">
+        </div>
+        <div class="spacer"></div>
+        <span class="mono" id="flotte-count" style="font-size:12.5px;color:var(--ink-soft);font-weight:600;"></span>
+      </div>
+
+      <div id="flotte-table-wrap" class="table-wrap"></div>
+
+      <div class="add-form">
+        <h3>Ajouter un vÃ©hicule Ã  la flotte</h3>
+        <div class="row">
+          <div class="field"><label>Immatriculation</label><input id="f-plate" placeholder="Ex: AA-012-TF-01" style="width:140px;"></div>
+          <div class="field"><label>NÂ° ChÃ¢ssis</label><input id="f-chassis" placeholder="Ex: R1K..." style="width:160px;"></div>
+          <div class="field"><label>ModÃ¨le / Marque</label><input id="f-model" placeholder="Ex: BESTUNE T55" style="width:180px;"></div>
+          <button class="btn" onclick="addFleetVehicle()">Ajouter le vÃ©hicule</button>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ EQUIPE ============ -->
     <section id="equipe" class="view">
-      <div class="topbar"><h2>Équipe — Agents de Planification</h2></div>
+      <div class="topbar"><h2>Ã‰quipe â€” Agents de Planification</h2></div>
       <div class="bar">Suivi des agents</div>
       <div class="agent-grid" id="agent-grid"></div>
 
@@ -311,10 +339,10 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
         <h3>Ajouter un agent</h3>
         <div class="row">
           <div class="field"><label>Nom</label><input id="a-name" placeholder="Nom complet" style="width:160px;"></div>
-          <div class="field"><label>Rôle</label><input id="a-role" placeholder="Agent de planification" style="width:170px;"></div>
-          <div class="field"><label>Tâches réalisées</label><input id="a-done" type="number" min="0" value="0" style="width:80px;"></div>
-          <div class="field"><label>Tâches assignées</label><input id="a-total" type="number" min="0" value="0" style="width:80px;"></div>
-          <div class="field"><label>Absences non justifiées</label><input id="a-abs" type="number" min="0" value="0" style="width:80px;"></div>
+          <div class="field"><label>RÃ´le</label><input id="a-role" placeholder="Agent de planification" style="width:170px;"></div>
+          <div class="field"><label>TÃ¢ches rÃ©alisÃ©es</label><input id="a-done" type="number" min="0" value="0" style="width:80px;"></div>
+          <div class="field"><label>TÃ¢ches assignÃ©es</label><input id="a-total" type="number" min="0" value="0" style="width:80px;"></div>
+          <div class="field"><label>Absences non justifiÃ©es</label><input id="a-abs" type="number" min="0" value="0" style="width:80px;"></div>
           <button class="btn" onclick="addAgent()">Ajouter l'agent</button>
         </div>
       </div>
@@ -323,7 +351,7 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
     <!-- ============ JOURNAL ============ -->
     <section id="journal" class="view">
       <div class="topbar"><h2>Journal et rapports</h2></div>
-      <div class="bar">Nouvelle entrée</div>
+      <div class="bar">Nouvelle entrÃ©e</div>
       <div class="add-form" style="margin-top:0;">
         <div class="row" style="margin-bottom:10px;">
           <div class="field"><label>Type de rapport</label>
@@ -335,8 +363,8 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
           </div>
           <div class="field"><label>Date</label><input id="j-date" type="date"></div>
         </div>
-        <textarea id="j-text" rows="3" placeholder="Points clés, incidents, décisions prises..."></textarea>
-        <div style="margin-top:10px;"><button class="btn" onclick="addJournal()">Enregistrer l'entrée</button></div>
+        <textarea id="j-text" rows="3" placeholder="Points clÃ©s, incidents, dÃ©cisions prises..."></textarea>
+        <div style="margin-top:10px;"><button class="btn" onclick="addJournal()">Enregistrer l'entrÃ©e</button></div>
       </div>
 
       <div class="bar">Historique</div>
@@ -357,23 +385,23 @@ tbody tr.row-expire:hover{background:#F0D5CE;}
 
     <!-- ============ STRATEGIE ============ -->
     <section id="strategie" class="view">
-      <div class="topbar"><h2>Stratégie et planification</h2></div>
-      <div class="bar">Notes de pilotage à moyen et long terme</div>
+      <div class="topbar"><h2>StratÃ©gie et planification</h2></div>
+      <div class="bar">Notes de pilotage Ã  moyen et long terme</div>
 
       <div class="notepad">
-        <h3>Anticipation des besoins <span class="save-flag" id="flag-besoins">enregistré</span></h3>
-        <p class="hint">Renouvellement et expansion de la flotte à prévoir.</p>
-        <textarea id="s-besoins" rows="4" placeholder="Ex : anticiper 12 renouvellements de cartes grises pour le T3, prévoir l'ajout de 5 véhicules pour la zone Cocody..."></textarea>
+        <h3>Anticipation des besoins <span class="save-flag" id="flag-besoins">enregistrÃ©</span></h3>
+        <p class="hint">Renouvellement et expansion de la flotte Ã  prÃ©voir.</p>
+        <textarea id="s-besoins" rows="4" placeholder="Ex : anticiper 12 renouvellements de cartes grises pour le T3, prÃ©voir l'ajout de 5 vÃ©hicules pour la zone Cocody..."></textarea>
       </div>
       <div class="notepad">
-        <h3>Axes d'optimisation <span class="save-flag" id="flag-axes">enregistré</span></h3>
-        <p class="hint">Analyse des KPI et pistes d'amélioration du service.</p>
-        <textarea id="s-axes" rows="4" placeholder="Ex : automatiser les rappels d'échéance, réduire le délai moyen de résolution des pièces manquantes..."></textarea>
+        <h3>Axes d'optimisation <span class="save-flag" id="flag-axes">enregistrÃ©</span></h3>
+        <p class="hint">Analyse des KPI et pistes d'amÃ©lioration du service.</p>
+        <textarea id="s-axes" rows="4" placeholder="Ex : automatiser les rappels d'Ã©chÃ©ance, rÃ©duire le dÃ©lai moyen de rÃ©solution des piÃ¨ces manquantes..."></textarea>
       </div>
       <div class="notepad">
-        <h3>Budget prévisionnel <span class="save-flag" id="flag-budget">enregistré</span></h3>
-        <p class="hint">Budgets à soumettre pour les activités planifiées.</p>
-        <textarea id="s-budget" rows="4" placeholder="Ex : budget visites techniques T3 — estimation..."></textarea>
+        <h3>Budget prÃ©visionnel <span class="save-flag" id="flag-budget">enregistrÃ©</span></h3>
+        <p class="hint">Budgets Ã  soumettre pour les activitÃ©s planifiÃ©es.</p>
+        <textarea id="s-budget" rows="4" placeholder="Ex : budget visites techniques T3 â€” estimation..."></textarea>
       </div>
     </section>
 
@@ -387,21 +415,26 @@ let agents = [];
 let kpis = {};
 let journal = [];
 let strategy = {besoins:'', axes:'', budget:''};
+let fleet = [];
+const defaultFleet = [{"plate":"28561WWCI01","chassis":"SRG552950","model":"SUZUKIDZIRE"},{"plate":"55500","chassis":"SA020448","model":"KAIYIE5"},{"plate":"55502WWCI01","chassis":"SA020465","model":"KAIYIE5"},{"plate":"55504","chassis":"SA020482","model":"KAIYIE5"},{"plate":"55505","chassis":"SA020496","model":"KAIYIE5"},{"plate":"55506-WW-CI-01","chassis":"SA020501","model":"KAIYIE5"},{"plate":"55507WWCI01","chassis":"SA020515","model":"KAIYIE5"},{"plate":"55510WWCI01","chassis":"SA020460","model":"KAIYIE5"},{"plate":"55511WWCI01","chassis":"SA020474","model":"KAIYIE5"},{"plate":"55514WWCI01","chassis":"SA020458","model":"KAIYIE5"},{"plate":"55515WWCI01","chassis":"SA020507","model":"KAIYIE5"},{"plate":"55516WWCI01","chassis":"SA020510","model":"KAIYIE5"},{"plate":"55517","chassis":"SA020449","model":"KAIYIE5"},{"plate":"55518WWCI01","chassis":"SA020452","model":"KAIYIE5"},{"plate":"55520-WW-CI-01","chassis":"SA020483","model":"KAIYIE5"},{"plate":"55521WWCI01","chassis":"SA020497","model":"KAIYIE5"},{"plate":"55522WWCI01","chassis":"SA020502","model":"KAIYIE5"},{"plate":"55525","chassis":"SA020461","model":"KAIYIE5"},{"plate":"55526","chassis":"SA020475","model":"KAIYIE5"},{"plate":"55527WWCI01","chassis":"SA020506","model":"KAIYIE5"},{"plate":"55528","chassis":"SA020489","model":"KAIYIE5"},{"plate":"55529","chassis":"SA020492","model":"KAIYIE5"},{"plate":"55530wwci01","chassis":"SA020508","model":"KAIYIE5"},{"plate":"55531","chassis":"SA020511","model":"KAIYIE5"},{"plate":"55533","chassis":"SA020467","model":"KAIYIE5"},{"plate":"55534","chassis":"SA020470","model":"KAIYIE5"},{"plate":"55535","chassis":"SA020484","model":"KAIYIE5"},{"plate":"55537-WW-CI-01","chassis":"SA020503","model":"KAIYIE5"},{"plate":"55539WWCI01","chassis":"SA020520","model":"KAIYIE5"},{"plate":"55541WWCI01","chassis":"SA020459","model":"KAIYIE5"},{"plate":"55542WWCI01","chassis":"SA020462","model":"KAIYIE5"},{"plate":"55543WWCI01","chassis":"SA020476","model":"KAIYIE5"},{"plate":"55544WWCI01","chassis":"SA020493","model":"KAIYIE5"},{"plate":"55546WWCI01","chassis":"SA020512","model":"KAIYIE5"},{"plate":"55548WWCI01","chassis":"SA020468","model":"KAIYIE5"},{"plate":"55550WWCI01","chassis":"SA020485","model":"KAIYIE5"},{"plate":"55552WWCI01","chassis":"SA020504","model":"KAIYIE5"},{"plate":"55553WWCI","chassis":"SA020518","model":"KAIYIE5"},{"plate":"55556WWCI01","chassis":"SA020463","model":"KAIYIE5"},{"plate":"55557WWCI01","chassis":"SA020477","model":"KAIYIE5"},{"plate":"55558WWCI01","chassis":"SA020490","model":"KAIYIE5"},{"plate":"55559","chassis":"SA020494","model":"KAIYIE5"},{"plate":"55560WWCI01","chassis":"SA020513","model":"KAIYIE5"},{"plate":"55561WWCI01","chassis":"SA020455","model":"KAIYIE5"},{"plate":"55562","chassis":"SA020469","model":"KAIYIE5"},{"plate":"55563-WW-CI-01","chassis":"SA020472","model":"KAIYIE5"},{"plate":"55564WWCI01","chassis":"SA020486","model":"KAIYIE5"},{"plate":"55565","chassis":"SA020505","model":"KAIYIE5"},{"plate":"55566.WW.CI01","chassis":"SA020519","model":"KAIYIE5"},{"plate":"55567WWCI01","chassis":"SA020522","model":"KAIYIE5"},{"plate":"55568WWCI01","chassis":"SA020447","model":"KAIYIE5"},{"plate":"55569WWCI01","chassis":"SA020450","model":"KAIYIE5"},{"plate":"55570WW.CI01","chassis":"SA020464","model":"KAIYIE5"},{"plate":"55571WWCI01","chassis":"SA020478","model":"KAIYIE5"},{"plate":"55572","chassis":"SA020481","model":"KAIYIE5"},{"plate":"55573WWCI01","chassis":"SA020495","model":"KAIYIE5"},{"plate":"55574WWCI01","chassis":"SA020500","model":"KAIYIE5"},{"plate":"55575WWCI01","chassis":"SA020514","model":"KAIYIE5"},{"plate":"55578WWCI01","chassis":"SA020456","model":"KAIYIE5"},{"plate":"55579WWCI01","chassis":"SA020480","model":"KAIYIE5"},{"plate":"56045WWCI01","chassis":"R1Y00030","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56046WWCI01","chassis":"R1Y00032","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56047WWCI01","chassis":"R1Y00027","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56049WWCI01","chassis":"R1Y00029","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56050WWCI01","chassis":"R1Y00017","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56051WWCI01","chassis":"Y00009","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56052WWCI01","chassis":"R1Y00010","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56054WWCI01","chassis":"R1Y00016","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56055WWCI01","chassis":"R1Y00039","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56057WWCI01","chassis":"R1Y00038","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56058WWCI01","chassis":"R1Y00040","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56059WWCI01","chassis":"R1Y00076","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56061WWCI01","chassis":"Y00077","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56062WWCI01","chassis":"R1Y00080","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56064WWCI01","chassis":"R1Y00081","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56065WWCI01","chassis":"R1Y00018","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56066WWCI01","chassis":"R1Y00021","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56068WWCI01","chassis":"R1Y00024","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56069WWCI01","chassis":"R1Y00026","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56070WWCI01","chassis":"R1Y00005","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56071WWCI01","chassis":"R1Y00022","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56072WWCI01","chassis":"R1Y00031","model":"BESTUNEELECTRICPONY"},{"plate":"56073WWCI01","chassis":"R1Y00037","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56074WWCI01","chassis":"R1Y00082","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56075WWCI01","chassis":"R1Y00156","model":"BESTUNEELECTRIQUE"},{"plate":"56076WWCI01","chassis":"R1Y00155","model":"BESTUNEELECTRIQUE"},{"plate":"56077WWCI01","chassis":"R1Y00154","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56078WWCI01","chassis":"Y00152","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56079WWCI01","chassis":"R1Y00153","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56080WWCI01","chassis":"R1Y00138","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56082WWCI01","chassis":"R1Y00141","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56083WWCI01","chassis":"R1Y00139","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56085WWCI01","chassis":"R1Y00056","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56086WWCI01","chassis":"R1Y00105","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56088WWCI01","chassis":"R1Y00070","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56089WWCI01","chassis":"S1Y00082","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56090WWCI01","chassis":"R1Y00150","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56091WWCI01","chassis":"R1Y00151","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56092WWCI01","chassis":"R1Y00149","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56093WWCI01","chassis":"R1Y00147","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56094WWCI01","chassis":"R1Y00148","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56095WWCI01","chassis":"R1Y00135","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56096WWCI01","chassis":"R1Y00115","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56097WWCI01","chassis":"R1Y00116","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56098WWCI01","chassis":"R1Y00113","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56099WWCI01","chassis":"R1Y00114","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56100WWCI01","chassis":"R1Y00146","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56102WWCI01","chassis":"R1Y00142","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56103WWCI01","chassis":"R1Y00143","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56104WWCI01","chassis":"R1Y00144","model":"BESTUNEELECTRIQUE"},{"plate":"56105WWCI01","chassis":"R1Y00110","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56106WWCI01","chassis":"R1Y00111","model":"ELECTRIQUEPONY"},{"plate":"56107WWCI01","chassis":"R1Y00109","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56108WWCI01","chassis":"R1Y00106","model":"BESTUNEELECTRIQUEPONY"},{"plate":"56109WWCI01","chassis":"R1Y00107","model":"BESTUNEELECTRIQUEPONY"},{"plate":"65986","chassis":"-","model":"MOTOBOXER"},{"plate":"66806WWCI01","chassis":"R1K03022","model":"BESTUNET55"},{"plate":"66811WWCI-01","chassis":"R1K03039","model":"BESTUNET55"},{"plate":"66812WWCI-01","chassis":"R1K03069","model":"BESTUNET55"},{"plate":"66814WWCI01","chassis":"R1K02252","model":"BESTUNET55"},{"plate":"66815WWCI01","chassis":"R1K02426","model":"BESTUNET55"},{"plate":"66816WWCI-01","chassis":"R1K03154","model":"BESTUNET55"},{"plate":"66817WWCI01","chassis":"R1K03168","model":"BESTUNET55"},{"plate":"66819WWCI-01","chassis":"R1K14334","model":"BESTUNEB70"},{"plate":"66821WWCI-01","chassis":"R1K14387","model":"BESTUNEB70"},{"plate":"66823WWCI01","chassis":"RE022951","model":"CHERYTIGGO2"},{"plate":"66824WWCI01","chassis":"R1K14319","model":"BESTUNEB70"},{"plate":"66825WWCI01","chassis":"R1K14304","model":"BESTUNEB70"},{"plate":"66826WWCI01","chassis":"R1K14062","model":"BESTUNEB70"},{"plate":"66827WWCI01","chassis":"R1K14270","model":"BESTUNEB70"},{"plate":"66828WWCI01","chassis":"R1K14357","model":"BESTUNEB70"},{"plate":"66829WWCI01","chassis":"R1K14284","model":"BESTUNEB70"},{"plate":"66830WW-CI-01","chassis":"R1K14252","model":"BESTUNEB70"},{"plate":"66831WWCI01","chassis":"R1K14001","model":"BESTUNEB70"},{"plate":"66832WWCI01","chassis":"R1K14414","model":"BESTUNEB70"},{"plate":"66833WWCI01","chassis":"R1K0665","model":"BESTUNET55"},{"plate":"66834WWCI01","chassis":"R1K03283","model":"BESTUNET55"},{"plate":"66835WWCI01","chassis":"R1K03287","model":"BESTUNET55"},{"plate":"66836WWCI01","chassis":"P1K02177","model":"BESTUNET55"},{"plate":"66864WWCI01","chassis":"SA016046","model":"KAIYIE5"},{"plate":"66865WWCI01","chassis":"SA016660","model":"KAIYIE5"},{"plate":"66867WWCI01","chassis":"SA016049","model":"KAIYIE5"},{"plate":"66868WWCI01","chassis":"SA016076","model":"KAIYIE5"},{"plate":"66869WWCI01","chassis":"SA016063","model":"KAIYIE5"},{"plate":"66870WWCI01","chassis":"SA016073","model":"KAIYIE5"},{"plate":"66871WWCI01","chassis":"SA016056","model":"KAIYIE5"},{"plate":"66872WWCI01","chassis":"SA016057","model":"KAIYIE5"},{"plate":"66873WWCI01","chassis":"SA016070","model":"KAIYIE5"},{"plate":"66876WWCI01","chassis":"SA016045","model":"KAIYIE5"},{"plate":"66877WWCI01","chassis":"SA016059","model":"KAIYIE5"},{"plate":"66878WWCI01","chassis":"SA017258","model":"KAIYIE5"},{"plate":"66879WWCI01","chassis":"SA016047","model":"KAIYIE5"},{"plate":"66880WWCI01","chassis":"SA016051","model":"KAIYIE5"},{"plate":"66881WWCI01","chassis":"SA016053","model":"KAIYIE5"},{"plate":"66884WWCI01","chassis":"SA016069","model":"KAIYIE5"},{"plate":"66885WWCI01","chassis":"SA016071","model":"KAIYIE5"},{"plate":"66886WWCI01","chassis":"SA016058","model":"KAIYIE5"},{"plate":"66887WWCI01","chassis":"SA016061","model":"KAIYIE5"},{"plate":"66888WWCI01","chassis":"SA016078","model":"KAIYIE5"},{"plate":"66889WWCI01","chassis":"SA016077","model":"KAIYIE5"},{"plate":"66892WWCI01","chassis":"SA016068","model":"KAIYIE5"},{"plate":"66893WWCI01","chassis":"SA016072","model":"KAIYIE5"},{"plate":"66895WWCI01","chassis":"SA016052","model":"KAIYIE5"},{"plate":"66896WWCI01","chassis":"SA016055","model":"KAIYIE5"},{"plate":"66897WWCI01","chassis":"SA016067","model":"KAIYIE5"},{"plate":"66899WWCI01","chassis":"P1K03647","model":"BESTUNET55"},{"plate":"66900WWCI01","chassis":"P1K03705","model":"BESTUNET55"},{"plate":"66901WWCI01","chassis":"P1K04681","model":"BESTUNET55"},{"plate":"66902WWCI01","chassis":"P1K00090","model":"BESTUNET55"},{"plate":"66903WWCI01","chassis":"P1K30671","model":"BESTUNET55"},{"plate":"66905WWCI01","chassis":"P1K03442","model":"BESTUNET55"},{"plate":"66906WWCI01","chassis":"P1K03352","model":"BESTUNET55"},{"plate":"66907WWCI01","chassis":"P1K03443","model":"BESTUNET55"},{"plate":"66908WWCI01","chassis":"P1K03667","model":"BESTUNET55"},{"plate":"66909WWCI01","chassis":"P1K03371","model":"BESTUNET55"},{"plate":"66910WWCI01","chassis":"P1K03449","model":"BESTUNET55"},{"plate":"66911WWCI01","chassis":"P1K03662","model":"BESTUNET55"},{"plate":"66912WWCI01","chassis":"RJK12752","model":"BESTUNET77"},{"plate":"66913WWCI01","chassis":"RJK12773","model":"BESTUNET77"},{"plate":"66914WWCI01","chassis":"RJK12787","model":"BESTUNET77"},{"plate":"66915WWCI01","chassis":"RJK12776","model":"BESTUNET77"},{"plate":"66916WWCI01","chassis":"RJK12749","model":"BESTUNET77"},{"plate":"66917WWCI01","chassis":"RJK12792","model":"BESTUNET77"},{"plate":"66918WWCI01","chassis":"RJK12793","model":"BESTUNET77"},{"plate":"66919WWCI01","chassis":"RJK12782","model":"BESTUNET77"},{"plate":"66920WWCI01","chassis":"RJK08893","model":"BESTUNET77"},{"plate":"66921WWCI01","chassis":"RJK08884","model":"BESTUNET77"},{"plate":"66922WWCI01","chassis":"RJK08908","model":"BESTUNET77"},{"plate":"66923WWCI01","chassis":"RJK08899","model":"BESTUNET77"},{"plate":"66924WWCI01","chassis":"RJK08887","model":"BESTUNET77"},{"plate":"66925WWCI01","chassis":"RJK08873","model":"BESTUNET77"},{"plate":"66926WWCI01","chassis":"RJK08883","model":"BESTUNET77"},{"plate":"66927WWCI01","chassis":"RJK08875","model":"BESTUNET77"},{"plate":"66928WWCI01","chassis":"RJK08879","model":"BESTUNET77"},{"plate":"66929WWCI01","chassis":"RJK08874","model":"BESTUNET77"},{"plate":"66930WWCI01","chassis":"RJK08889","model":"BESTUNET77"},{"plate":"66931WWCI01","chassis":"RJK08880","model":"BESTUNET77"},{"plate":"66932WWCI01","chassis":"RJK12553","model":"BESTUNET77"},{"plate":"66933WWCI01","chassis":"RJK12538","model":"BESTUNET77"},{"plate":"85292","chassis":"-","model":"MOTOBOXER"},{"plate":"88113WWCI01","chassis":"RJK12781","model":"BESTUNET77"},{"plate":"88114WWCI01","chassis":"RJK08876","model":"BESTUNET77"},{"plate":"88115WWCI01","chassis":"RJK12751","model":"BESTUNET77"},{"plate":"88116WWCI01","chassis":"RJK08871","model":"BESTUNET77"},{"plate":"88117WWCI01","chassis":"RJK08885","model":"BESTUNET77"},{"plate":"88118WWCI01","chassis":"RJK12774","model":"BESTUNET77"},{"plate":"88121WWCI01","chassis":"RJK08894","model":"BESTUNET77"},{"plate":"88122WWCI01","chassis":"RJK08869","model":"BESTUNET77"},{"plate":"88123WWCI01","chassis":"RJK08878","model":"BESTUNET77"},{"plate":"88124WWCI01","chassis":"RJK08895","model":"BESTUNET77"},{"plate":"88125WWCI01","chassis":"RJK08900","model":"BESTUNET77"},{"plate":"88126WWCI01","chassis":"RJK12551","model":"BESTUNET77"},{"plate":"88127WWCI01","chassis":"RJK12770","model":"BESTUNET77"},{"plate":"88129WWCI01","chassis":"RJK12519","model":"BESTUNET77"},{"plate":"88130WWCI01","chassis":"RJK12729","model":"BESTUNET77"},{"plate":"88131WWCI01","chassis":"RJK12777","model":"BESTUNET77"},{"plate":"88132WWCI01","chassis":"RJK12780","model":"BESTUNET77"},{"plate":"88133WWCI01","chassis":"R1K14418","model":"BESTUNEB70"},{"plate":"88134WWCI01","chassis":"R1K14421","model":"BESTUNEB70"},{"plate":"88135WWCI01","chassis":"R1K14444","model":"BESTUNEB70"},{"plate":"88136WWCI01","chassis":"R1K14307","model":"BESTUNEB70"},{"plate":"88137WWCI01","chassis":"R1K14341","model":"BESTUNEB70"},{"plate":"88138WWCI01","chassis":"R1K14422","model":"BESTUNEB70"},{"plate":"88139WWCI01","chassis":"R1K14400","model":"BESTUNEB70"},{"plate":"88140WWCI01","chassis":"R1K14493","model":"BESTUNEB70"},{"plate":"88141WWCI01","chassis":"R1K14423","model":"BESTUNEB70"},{"plate":"88142WWCI01","chassis":"R1K14437","model":"BESTUNEB70"},{"plate":"88143WWCI01","chassis":"R1K14440","model":"BESTUNEB70"},{"plate":"88144WWCI01","chassis":"R1K14396","model":"BESTUNEB70"},{"plate":"88145WWCI01","chassis":"R1K14407","model":"BESTUNEB70"},{"plate":"88146WWCI01","chassis":"R1K14438","model":"BESTUNEB70"},{"plate":"88147WWCI01","chassis":"R1K14505","model":"BESTUNEB70"},{"plate":"88148WWCI01","chassis":"R1K14383","model":"BESTUNEB70"},{"plate":"88149WWCI01","chassis":"R1K14408","model":"BESTUNEB70"},{"plate":"88150WWCI01","chassis":"R1K14439","model":"BESTUNEB70"},{"plate":"88151WWCI01","chassis":"R1K14398","model":"BESTUNEB70"},{"plate":"88152WWCI01","chassis":"R1K14403","model":"BESTUNEB70"},{"plate":"88153WWCI01","chassis":"P1K03413","model":"BESTUNET55"},{"plate":"88154WWCI01","chassis":"R1K04609","model":"BESTUNET55"},{"plate":"88155WWCI01","chassis":"R1K09084","model":"BESTUNET55"},{"plate":"88156WWCI01","chassis":"R1K09098","model":"BESTUNET55"},{"plate":"88157WWCI01","chassis":"R1K09117","model":"BESTUNET55"},{"plate":"88158WWCI01","chassis":"R1K09120","model":"BESTUNET55"},{"plate":"88159WWCI01","chassis":"R1K09232","model":"BESTUNET55"},{"plate":"88160WWCI01","chassis":"P1K03632","model":"BESTUNET55"},{"plate":"88161WWCI01","chassis":"R1K09093","model":"BESTUNET55"},{"plate":"88162WWCI01","chassis":"P1K03414","model":"BESTUNET55"},{"plate":"88163WWCI01","chassis":"R1K09085","model":"BESTUNET55"},{"plate":"88164WWCI01","chassis":"P1K03261","model":"BESTUNET55"},{"plate":"88166WWCI01","chassis":"R1K09119","model":"BESTUNET55"},{"plate":"88167WWCI01","chassis":"R1K09087","model":"BESTUNET55"},{"plate":"88168WWCI01","chassis":"R1K09090","model":"BESTUNET55"},{"plate":"88169WWCI01","chassis":"R1K09106","model":"BESTUNET55"},{"plate":"88170WWCI01","chassis":"R1K09101","model":"BESTUNET55"},{"plate":"88171WWCI01","chassis":"R1K09107","model":"BESTUNET55"},{"plate":"88172WWCI01","chassis":"R1K09052","model":"BESTUNET55"},{"plate":"88173WWCI01","chassis":"R1K09083","model":"BESTUNET55"},{"plate":"88174WWCI01","chassis":"R1K09102","model":"BESTUNET55"},{"plate":"88175WWCI01","chassis":"R1K09116","model":"BESTUNET55"},{"plate":"88176WWCI01","chassis":"R1K09214","model":"BESTUNET55"},{"plate":"92249","chassis":"-","model":"MOTOBOXER"},{"plate":"92250","chassis":"-","model":"MOTOBOXER"},{"plate":"92253","chassis":"-","model":"MOTOBOXER"},{"plate":"92260","chassis":"-","model":"MOTOBOXER"},{"plate":"92300","chassis":"-","model":"MOTOBOXER"},{"plate":"92301","chassis":"-","model":"MOTOBOXER"},{"plate":"92313","chassis":"-","model":"MOTOBOXER"},{"plate":"92321","chassis":"-","model":"MOTOBOXER"},{"plate":"92327","chassis":"-","model":"MOTOBOXER"},{"plate":"92334","chassis":"-","model":"MOTOBOXER"},{"plate":"92347","chassis":"-","model":"MOTOBOXER"},{"plate":"97503","chassis":"-","model":"MOTOBOXER"},{"plate":"97504","chassis":"-","model":"MOTOBOXER"},{"plate":"97520","chassis":"-","model":"MOTOBOXER"},{"plate":"97539","chassis":"-","model":"MOTOBOXER"},{"plate":"97557","chassis":"-","model":"MOTOBOXER"},{"plate":"97858","chassis":"-","model":"MOTOBOXER"},{"plate":"97864","chassis":"-","model":"MOTOBOXER"},{"plate":"97936","chassis":"-","model":"MOTOBOXER"},{"plate":"97939","chassis":"-","model":"MOTOBOXER"},{"plate":"97947","chassis":"-","model":"MOTOBOXER"},{"plate":"97992","chassis":"-","model":"MOTOBOXER"},{"plate":"97993","chassis":"-","model":"MOTOBOXER"},{"plate":"97994","chassis":"-","model":"MOTOBOXER"},{"plate":"97997","chassis":"-","model":"MOTOBOXER"},{"plate":"AA-012-TF-01","chassis":"R1K02989","model":"BESTUNET55"},{"plate":"AA-013-TF-01","chassis":"R1K09074","model":"BESTUNET55"},{"plate":"AA-014-TF","chassis":"R1K03029","model":"BESTUNET55"},{"plate":"AA-015-TF","chassis":"R1K02958","model":"BESTUNET55"},{"plate":"AA-019-LL-01","chassis":"-","model":"BESTUNET55"},{"plate":"AA-019-TF-01","chassis":"R1K03040","model":"BESTUNET55"},{"plate":"AA-021-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-023-LL-01","chassis":"-","model":"FAWBESTUNET55R1K06590"},{"plate":"AA-023-TF","chassis":"R1K04187","model":"BESTUNET55"},{"plate":"AA-024-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-024-TF","chassis":"R1K14317","model":"BESTUNEB70"},{"plate":"AA-025-LL-01","chassis":"-","model":"FAWBESTUNET55R1K06574"},{"plate":"AA-025-TF","chassis":"R1K03036","model":"BESTUNET55"},{"plate":"AA-026-LL-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-026-TF-01","chassis":"P1K02149","model":"BESTUNET55"},{"plate":"AA-027-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-028-LL","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-029-LL","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-029-TF","chassis":"P1K02173","model":"BESTUNET55"},{"plate":"AA-031-LL-01","chassis":"-","model":"BESTUNET55"},{"plate":"AA-031-TF","chassis":"R1K14261","model":"BESTUNEB70"},{"plate":"AA-032-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-035-LL","chassis":"R1K06610","model":"BESTUNET55"},{"plate":"AA-036-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-038-LL-01","chassis":"-","model":"BESTUNET55"},{"plate":"AA-039-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-039-LZ","chassis":"-","model":"SUZUKIDZIRE"},{"plate":"AA-041-LL","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-042-LL-01","chassis":"06642","model":"BESTUNET55"},{"plate":"AA-042-RQ-01","chassis":"RE022970","model":"CHERYTIGGO2"},{"plate":"AA-043-LL-01","chassis":"BESTUNEB70","model":"6817"},{"plate":"AA-043-RQ","chassis":"RE058177","model":"CHERYTIGGO2PRO"},{"plate":"AA-045-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-045-TP","chassis":"R1K03117","model":"BESTUNET55"},{"plate":"AA-046-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-047-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-047-RQ","chassis":"RE058168","model":"CHERYTIGGO2PRO"},{"plate":"AA-048-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-049-LL-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-049-TP","chassis":"R1K03256","model":"BESTUNET55"},{"plate":"AA-051-LL-01","chassis":"-","model":"FAWBESTUNET55R1K06631"},{"plate":"AA-051-RQ","chassis":"RE058150","model":"CHERYTIGGO2PRO"},{"plate":"AA-052-LL-01","chassis":"R1K06683","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-054-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-056-LL-01","chassis":"R1K14209","model":"FAWBESTUNEB70"},{"plate":"AA-056-RQ","chassis":"RE022971","model":"CHERYTIGGO2"},{"plate":"AA-062-TP","chassis":"R1K03126","model":"BESTUNET55"},{"plate":"AA-063-VL-01","chassis":"R1K09064","model":"BESTUNET55"},{"plate":"AA-064-VL-01","chassis":"R1K03016","model":"BESTUNET55"},{"plate":"AA-065-VL","chassis":"R1K09049","model":"BESTUNET55"},{"plate":"AA-067-VL","chassis":"R1K14397","model":"BESTUNEB70"},{"plate":"AA-068-VL-01","chassis":"R1K02982","model":"BESTUNET55"},{"plate":"AA-069-VL-01","chassis":"R1K02974","model":"BESTUNET55"},{"plate":"AA-071-RQ","chassis":"RE022959","model":"CHERYTIGGO2"},{"plate":"AA-071-VL-01","chassis":"R1K04207","model":"BESTUNET55"},{"plate":"AA-072-VL-01","chassis":"R1K03280","model":"BESTUNET55"},{"plate":"AA-073-LP-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-073-RQ","chassis":"RE058164","model":"CHERYTIGGO2PRO"},{"plate":"AA-073-VL","chassis":"R1K03037","model":"BESTUNET55"},{"plate":"AA-074-RQ","chassis":"RE058173","model":"CHERYTIGGO2PRO"},{"plate":"AA-074-VL-01","chassis":"R1K04240","model":"BESTUNET55"},{"plate":"AA-075-LP-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-075-TP-01","chassis":"R1K03152","model":"BESTUNET55"},{"plate":"AA-075-VL-01","chassis":"R1K04217","model":"BESTUNET55"},{"plate":"AA-076-LF","chassis":"-","model":"SUZUKIDZIRE"},{"plate":"AA-078-VL-01","chassis":"R1K03273","model":"BESTUNET55"},{"plate":"AA-079-VL","chassis":"R1K02270","model":"BESTUNET55"},{"plate":"AA-082-RQ","chassis":"RE022972","model":"CHERYTIGGO2"},{"plate":"AA-083-LP-01","chassis":"T55","model":"BESTUNEFAW"},{"plate":"AA-083-LZ","chassis":"SRG548697","model":"SUZUKIDZIRE"},{"plate":"AA-085-RQ","chassis":"RE058167","model":"CHERYTIGGO2PRO"},{"plate":"AA-086-TQ-01","chassis":"R1K02414","model":"BESTUNET55"},{"plate":"AA-087-LP-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-087-RQ","chassis":"RE022983","model":"CHERYTIGGO2"},{"plate":"AA-089-LP-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-091-LP-01","chassis":"-","model":"FAWBESTUNE"},{"plate":"AA-092-LP-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-093-RQ","chassis":"RE058159","model":"CHERYTIGGO2PRO"},{"plate":"AA-094-LP-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-095-LP-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-096-LP-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-097-TN","chassis":"R1K02538","model":"BESTUNET55"},{"plate":"AA-098-LP-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-103-LP-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-104-LP-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-104-LZ","chassis":"G534246","model":"SUZUKIDZIRE"},{"plate":"AA-104-RQ","chassis":"RE058162","model":"CHERYTIGGO2PRO"},{"plate":"AA-105-TN","chassis":"R1K02699","model":"BESTUNET55"},{"plate":"AA-105-TQ-01","chassis":"R1K03075","model":"BESTUNET55"},{"plate":"AA-108-TQ","chassis":"R1K03119","model":"BESTUNET55"},{"plate":"AA-114-TN","chassis":"R1K02302","model":"BESTUNET55"},{"plate":"AA-115-RQ-01","chassis":"RE022998","model":"CHERYTIGGO2"},{"plate":"AA-116-RX","chassis":"RE022969","model":"CHERYTIGGO2"},{"plate":"AA-132-TP-01","chassis":"R1K02669","model":"BESTUNET55"},{"plate":"AA-134-RQ","chassis":"RE022999","model":"CHERYTIGGO2"},{"plate":"AA-142-RQ","chassis":"RE022950","model":"CHERYTIGGO2"},{"plate":"AA-145-LE","chassis":"SRG553512","model":"SUZUKIDZIRE"},{"plate":"AA-148-TP-01","chassis":"R1K02583","model":"BESTUNET55"},{"plate":"AA-149-LE","chassis":"SRG552784","model":"SUZUKIDZIRE"},{"plate":"AA-149-TP-01","chassis":"R1K03302","model":"BESTUNET55"},{"plate":"AA-150-TP-01","chassis":"R1K03166","model":"BESTUNET55"},{"plate":"AA-151-TY","chassis":"R1K03112","model":"BESTUNET55"},{"plate":"AA-153-LE","chassis":"SRG547504","model":"SUZUKIDZIRE"},{"plate":"AA-156-TP","chassis":"R1K03111","model":"BESTUNET55"},{"plate":"AA-157-LE","chassis":"SRG549971","model":"SUZUKIDZIRE"},{"plate":"AA-161-LE","chassis":"SRG552183","model":"SUZUKIDZIRE"},{"plate":"AA-161-TN","chassis":"R1K02681","model":"BESTUNET55"},{"plate":"AA-162-SJ","chassis":"RA004682","model":"KAIYI"},{"plate":"AA-162-TN","chassis":"R1K03150","model":"BESTUNET55"},{"plate":"AA-165-RQ","chassis":"RE022961","model":"CHERYTIGGO2"},{"plate":"AA-166-LE","chassis":"SRG551310","model":"SUZUKIDZIRE"},{"plate":"AA-166-TN-01","chassis":"R1K03175","model":"BESTUNET55"},{"plate":"AA-167-RQ","chassis":"RE022994","model":"CHERYTIGGO2"},{"plate":"AA-168-LE","chassis":"SRG551575","model":"SUZUKIDZIRE"},{"plate":"AA-168-LP-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-168-RQ","chassis":"RE022977","model":"CHERYTIGGO2"},{"plate":"AA-168-TP","chassis":"R1K03132","model":"BESTUNET55"},{"plate":"AA-102-LP-01","chassis":"R1K06618","model":"FAWBESTUNET55"},{"plate":"AA-170-LE","chassis":"SRG551848","model":"SUZUKIDZIRE"},{"plate":"AA-170-SJ","chassis":"RA004660","model":"KAIYI"},{"plate":"AA-172-TN","chassis":"R1K02516","model":"BESTUNET55"},{"plate":"AA-173-TN","chassis":"R1K02686","model":"BESTUNET55"},{"plate":"AA-174-TN","chassis":"R1K02692","model":"BESTUNET55"},{"plate":"AA-175-LE","chassis":"SRG552507","model":"SUZUKIDZIRE"},{"plate":"AA-176-LE","chassis":"SRG550302","model":"SUZUKIDZIRE"},{"plate":"AA-177-KV","chassis":"SRG552560","model":"SUZUKIDZIRE"},{"plate":"AA-178-KT","chassis":"SRG548547","model":"SUZUKIDZIRE"},{"plate":"AA-181-TQ-01","chassis":"R1K03013","model":"BESTUNET55"},{"plate":"AA-182-TQ","chassis":"R1K02422","model":"BESTUNET55"},{"plate":"AA-183-KV","chassis":"SRG552658","model":"SUZUKIDZIRE"},{"plate":"AA-184-SJ","chassis":"RA004429","model":"KAIYI"},{"plate":"AA-185-TQ-01","chassis":"R1K02703","model":"BESTUNET55"},{"plate":"AA-188-TQ","chassis":"R1K04258","model":"BESTUNET55"},{"plate":"AA-194-TN","chassis":"R1K02659","model":"BESTUNET55"},{"plate":"AA-194-VA","chassis":"R1K04334","model":"BESTUNET55"},{"plate":"AA-195-KV","chassis":"SRG552710","model":"SUZUKIDZIRE"},{"plate":"AA-203-TN-01","chassis":"R1K02317","model":"BESTUNET55"},{"plate":"AA-207-KV","chassis":"SRG552802","model":"SUZUKIDZIRE"},{"plate":"AA-212-TN","chassis":"R1K02345","model":"BESTUNET55"},{"plate":"AA-214-KV","chassis":"SRG551363","model":"SUZUKIDZIRE"},{"plate":"AA-215-LF","chassis":"G533010","model":"SUZUKIDZIRE"},{"plate":"AA-223-TG-01","chassis":"R1K14288","model":"BESTUNEB70"},{"plate":"AA-224-LF","chassis":"SRG551831","model":"SUZUKIDZIRE"},{"plate":"AA-224-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-229-SN","chassis":"RA004475","model":"KAIYI"},{"plate":"AA-230-TG-01","chassis":"R1K03045","model":"BESTUNET55"},{"plate":"AA-234-SJ","chassis":"RA004480","model":"KAIYI"},{"plate":"AA-244-RV","chassis":"RE022924","model":"CHERYTIGGO2PRO"},{"plate":"AA-250-TN-01","chassis":"R1K03157","model":"BESTUNET55"},{"plate":"AA-251-TN","chassis":"R1K03147","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-258-LE","chassis":"SRG551520","model":"SUZUKIDZIRE"},{"plate":"AA-259-TN","chassis":"R1K03059","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-262-LE","chassis":"SRG551893","model":"SUZUKIDZIRE"},{"plate":"AA-262-TN-01","chassis":"R1K02672","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-270-LE","chassis":"SRG548512","model":"SUZUKIDZIRE"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-276-TN","chassis":"R1K03220","model":"BESTUNET55"},{"plate":"AA-280-GL","chassis":"PE053785","model":"CHERYTIGGO2"},{"plate":"AA-280-RR","chassis":"RE058157","model":"CHERYTIGGO2PRO"},{"plate":"AA-280-TN","chassis":"R1K02532","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-290-RV","chassis":"RE058180","model":"CHERYTIGGO2PRO"},{"plate":"AA-294-TN","chassis":"R1K02423","model":"BESTUNET55"},{"plate":"AA-297-TL","chassis":"R1K00676","model":"BESTUNET55"},{"plate":"AA-306-TL","chassis":"R1K03267","model":"BESTUNET55"},{"plate":"AA-312-LE","chassis":"SRG551663","model":"SUZUKIDZIRE"},{"plate":"AA-313-TN","chassis":"R1K03139","model":"BESTUNET55"},{"plate":"AA-314-TL-01","chassis":"R1K00643","model":"BESTUNET55"},{"plate":"AA-323-TN-01","chassis":"R1K02619","model":"BESTUNET55"},{"plate":"AA-325-TL-01","chassis":"R1K03149","model":"BESTUNET55"},{"plate":"AA-328-TN","chassis":"R1K03249","model":"BESTUNET55"},{"plate":"AA-335-TL","chassis":"R1K03189","model":"BESTUNET55"},{"plate":"AA-337-TS","chassis":"R1K02511","model":"BESTUNET55"},{"plate":"AA-338-TN","chassis":"R1K03262","model":"BESTUNET55"},{"plate":"AA-339-TS","chassis":"R1K02544","model":"BESTUNET55"},{"plate":"AA-340-TN-01","chassis":"R1K02525","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-342-NE","chassis":"SRG547636","model":"SUZUKIDZIRE"},{"plate":"AA-342-TN-01","chassis":"R1K02261","model":"BESTUNET55"},{"plate":"AA-343-TL-01","chassis":"R1K02702","model":"BESTUNET55"},{"plate":"AA-346-TN-01","chassis":"R1K02299","model":"BESTUNET55"},{"plate":"AA-348-TL-01","chassis":"R1K02981","model":"BESTUNET55"},{"plate":"AA-348-TS-01","chassis":"R1K02178","model":"BESTUNET55"},{"plate":"AA-351-TN","chassis":"R1K02429","model":"BESTUNET55"},{"plate":"AA-353-TS","chassis":"R1K02170","model":"BESTUNET55"},{"plate":"AA-354-TN","chassis":"R1K02199","model":"BESTUNET55"},{"plate":"AA-356-TS","chassis":"R1K02197","model":"BESTUNET55"},{"plate":"AA-357-TS-01","chassis":"R1K02135","model":"BESTUNET55"},{"plate":"AA-359-TS-01","chassis":"R1K02148","model":"BESTUNET55"},{"plate":"AA-363-RQ","chassis":"RE022975","model":"CHERYTIGGO2"},{"plate":"AA-364-TS","chassis":"R1K02130","model":"BESTUNET55"},{"plate":"AA-364-TZ","chassis":"R1K02640","model":"BESTUNET55"},{"plate":"AA-365-TS-01","chassis":"R1K02140","model":"BESTUNET55"},{"plate":"AA-369-TS-01","chassis":"R1K02158","model":"BESTUNET55"},{"plate":"AA-376-RQ","chassis":"RE022927","model":"CHERYTIGGO2"},{"plate":"AA-381-TS-01","chassis":"R1K02187","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-382-RV","chassis":"RE022986","model":"CHERYTIGGO2"},{"plate":"AA-384-TL-01","chassis":"R1K02597","model":"BESTUNET55"},{"plate":"AA-385-LH","chassis":"G535371","model":"SUZUKIDZIRE"},{"plate":"AA-386-RV","chassis":"RE022988","model":"CHERYTIGGO2"},{"plate":"AA-386-TS","chassis":"R1K02160","model":"BESTUNET55"},{"plate":"AA-389-TG","chassis":"P1K02138","model":"BESTUNET55"},{"plate":"AA-390-RV","chassis":"RE058154","model":"CHERYTGGO2PRO"},{"plate":"AA-390-SK","chassis":"RA004683","model":"KAIYI"},{"plate":"AA-390-TL-01","chassis":"R1K03143","model":"BESTUNET55"},{"plate":"AA-392-TZ","chassis":"R1K03101","model":"BESTUNET55"},{"plate":"AA-397-SK","chassis":"RA004436","model":"KAIYI"},{"plate":"AA-401-SK","chassis":"RA004589","model":"KAIYI"},{"plate":"AA-401-TL-01","chassis":"R1K03137","model":"BESTUNET55"},{"plate":"AA-402-SK","chassis":"RA004461","model":"KAIYI"},{"plate":"AA-403-LH","chassis":"SRG534315","model":"SUZUKIDZIRE"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-405-RV","chassis":"RE058183","model":"CHERYTIGGO2PRO"},{"plate":"AA-405-SK","chassis":"RA004472","model":"KAIYI"},{"plate":"AA-406-TL-01","chassis":"R1K00630","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-410-RV","chassis":"RE058149","model":"CHERYTIGGO2PRO"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-411-SK","chassis":"RA004437","model":"KAIYI"},{"plate":"AA-412-LZ-01","chassis":"R1K06549","model":"FAWBESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-415-TL-01","chassis":"R1K02594","model":"BESTUNET55"},{"plate":"AA-417-SK","chassis":"RA004450","model":"KAIYI"},{"plate":"AA-421-TL","chassis":"R1K03266","model":"BESTUNET55"},{"plate":"AA-422-RQ","chassis":"RE022955","model":"CHERYTIGGO2"},{"plate":"AA-422-SK","chassis":"RA004511","model":"KAIYI"},{"plate":"AA-423-SK","chassis":"RA004510","model":"KAIYI"},{"plate":"AA-424-LH","chassis":"-","model":"SUZUKIDZIRE"},{"plate":"AA-424-SK","chassis":"RA004591","model":"KAIYI"},{"plate":"AA-425-RQ","chassis":"RE058174","model":"CHERYTIGGO2PRO"},{"plate":"AA-425-SK","chassis":"RA004709","model":"KAIYI"},{"plate":"AA-426-TL","chassis":"R1K02639","model":"BESTUNET55"},{"plate":"AA-427-TS","chassis":"R1K02142","model":"BESTUNET55"},{"plate":"AA-429-SK","chassis":"RA004684","model":"KAIYI"},{"plate":"AA-431-SK","chassis":"RA004470","model":"KAIYI"},{"plate":"AA-431-TN","chassis":"R1K02427","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-433-TN","chassis":"R1K02568","model":"BESTUNET55"},{"plate":"AA-434-LN-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-434-TN","chassis":"R1K02664","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-439-SK","chassis":"RA004456","model":"KAIYI"},{"plate":"AA-441-TF","chassis":"R1K14090","model":"BESTUNEB70"},{"plate":"AA-441-TN","chassis":"R1K03487","model":"BESTUNET55"},{"plate":"AA-441-VX-01","chassis":"R1K02991","model":"BESTUNET55"},{"plate":"AA-442-SK","chassis":"RA004512","model":"KAIYI"},{"plate":"AA-442-TF","chassis":"R1K14071","model":"BESTUNEB70"},{"plate":"AA-443-RQ","chassis":"RE022979","model":"CHERYTIGGO2"},{"plate":"AA-443-TF","chassis":"R1K14070","model":"BESTUNEB70"},{"plate":"AA-443-TN","chassis":"R1K02386","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-445-SK","chassis":"RA004506","model":"KAIYI"},{"plate":"AA-445-TF","chassis":"R1K14068","model":"BESTUNEB70"},{"plate":"AA-446-TF","chassis":"R1K14086","model":"BESTUNEB70"},{"plate":"AA-446-TN-01","chassis":"R1K03269","model":"BESTUNET55"},{"plate":"AA-447-SK","chassis":"RA004493","model":"KAIYI"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-448-RQ","chassis":"RE058155","model":"CHERYTIGGO2PRO"},{"plate":"AA-448-TF","chassis":"R1K14097","model":"BESTUNEB70"},{"plate":"AA-449-TF","chassis":"R1K14265","model":"BESTUNEB70"},{"plate":"AA-449-TN","chassis":"R1K02193","model":"BESTUNET55"},{"plate":"AA-450-TF","chassis":"R1K09069","model":"BESTUNET55"},{"plate":"AA-451-TF","chassis":"P1K61112","model":"BESTUNET55"},{"plate":"AA-452-LH-01","chassis":"G533183","model":"SUZUKIDZIRE"},{"plate":"AA-452-TF","chassis":"R1K02997","model":"BESTUNET55"},{"plate":"AA-453-SK","chassis":"RA004495","model":"KAIYI"},{"plate":"AA-453-TF","chassis":"R1K14243","model":"BESTUNET55"},{"plate":"AA-454-TF-01","chassis":"R1K09059","model":"BESTUNET55"},{"plate":"AA-454-TN","chassis":"R1K03083","model":"BESTUNET55"},{"plate":"AA-454-TZ","chassis":"R1K03162","model":"BESTUNET55"},{"plate":"AA-456-TF","chassis":"P1K03150","model":"BESTUNET55"},{"plate":"AA-457-LH","chassis":"-","model":"SUZUKIDZIRE"},{"plate":"AA-457-SK","chassis":"RA004453","model":"KAIYI"},{"plate":"AA-458-LL-01","chassis":"R1K06587","model":"FAWBESTUNET55"},{"plate":"AA-458-TF-01","chassis":"R1K03017","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-459-LH","chassis":"-","model":"SUZUKIDZIRE"},{"plate":"AA-459-TF","chassis":"R1K14248","model":"BESTUNEB70"},{"plate":"AA-460-LJ-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-460-TF-01","chassis":"R1K03042","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-461-SK","chassis":"RA004596","model":"KAIYI"},{"plate":"AA-461-TF-01","chassis":"R1K14359","model":"BESTUNEFAW"},{"plate":"AA-462-LH","chassis":"G532350","model":"SUZUKIDZIRE"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-462-SK","chassis":"RA004494","model":"KAIYI"},{"plate":"AA-462-TF","chassis":"R1K14247","model":"BESTUNEB70"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-463-TF-01","chassis":"R1K03002","model":"BESTUNET55"},{"plate":"AA-464-LJ-01","chassis":"T55","model":"FAWBESTUNER1K06643"},{"plate":"AA-464-TF","chassis":"R1K03064","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-465-RQ","chassis":"RE022968","model":"CHERYTIGGO2"},{"plate":"AA-465-TF","chassis":"R1K02999","model":"BESTUNET55"},{"plate":"AA-467-LJ-01","chassis":"-","model":"T55FAW"},{"plate":"AA-467-SK","chassis":"RA004597","model":"KAIYI"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-468-TF","chassis":"R1K14310","model":"BESTUNEB70"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-469-TF-01","chassis":"R1K02980","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-470-TF","chassis":"P1K02156","model":"BESTUNET55"},{"plate":"AA-471-LJ","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-471-SK","chassis":"RA004509","model":"KAIYI"},{"plate":"AA-471-TF","chassis":"P1K02171","model":"BESTUNET55"},{"plate":"AA-472-LJ-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-472-TF","chassis":"P1K02157","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-473-LL","chassis":"-","model":"FAWBESTUNEB70(BALISEHS)"},{"plate":"AA-473-TF","chassis":"R1K03000","model":"BESTUNET55"},{"plate":"AA-474-LJ-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-474-LL-01","chassis":"R1K106634","model":"FAWBESTUNET55"},{"plate":"AA-474-TF","chassis":"P1K30645","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-475-LJ-01","chassis":"R1K06608FAWBESTUNET55","model":"-"},{"plate":"AA-475-LL-01","chassis":"R1K14198","model":"FAWBESTUNEB70"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-476-LL-01","chassis":"-","model":"BESTUNET55"},{"plate":"AA-476-TF","chassis":"R1K14313","model":"BESTUNEB70"},{"plate":"AA-478-LJ-01","chassis":"-","model":"FAWT55BESTUNE"},{"plate":"AA-478-LL-01","chassis":"-","model":"FAWBESTUNE(BALISEHS)"},{"plate":"AA-478-TF","chassis":"R1K04330","model":"BESTUNET55"},{"plate":"AA-479-LJ-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-479-LL-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-479-TF","chassis":"R1K02983","model":"BESTUNET55"},{"plate":"AA-480-LJ-01","chassis":"-","model":"T55FAW"},{"plate":"AA-480-LL-01","chassis":"R1K06505","model":"BESTUNET55"},{"plate":"AA-480-TF","chassis":"R1K02992","model":"BESTUNET55"},{"plate":"AA-481-LJ-01","chassis":"R1K16921","model":"FAWBESTUNEB70"},{"plate":"AA-481-LL-01","chassis":"-","model":"BESTUNET55"},{"plate":"AA-481-TF","chassis":"R1K14311","model":"BESTUNEB70"},{"plate":"AA-482-LJ-01","chassis":"R1K06627","model":"FAWBESTUNET55"},{"plate":"AA-482-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-482-SK","chassis":"RA004504","model":"KAIYI"},{"plate":"AA-482-TF-01","chassis":"R1K14318","model":"BESTUNEB70"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-483-LL-01","chassis":"R1K06651","model":"BESTUNET55"},{"plate":"AA-483-SK","chassis":"RA004505","model":"KAIYI"},{"plate":"AA-483-TF","chassis":"R1K14282","model":"BESTUNEB70"},{"plate":"AA-483-TG-01","chassis":"R1K14405","model":"BESTUNEB70"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-484-LL-01","chassis":"-","model":"BESTUNEB7072"},{"plate":"AA-484-SK","chassis":"RA004587","model":"KAIYI"},{"plate":"AA-484-TF","chassis":"R1K02965","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-485-LL-01","chassis":"-","model":"BESTUNET55"},{"plate":"AA-485-TF-01","chassis":"R1K02902","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-486-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-486-TF-01","chassis":"R1K03014","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-487-LL-01","chassis":"-","model":"BESTUNET55"},{"plate":"AA-487-SK","chassis":"RA004514","model":"KAIYI"},{"plate":"AA-487-TF","chassis":"P1K30647","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-489-LL-01","chassis":"-","model":"BESTUNET55FAW"},{"plate":"AA-489-SK","chassis":"RA004712","model":"KAIYI"},{"plate":"AA-489-TF","chassis":"R1K04309","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-490-LL-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-490-TF-01","chassis":"R1K02988","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-491-LL-01","chassis":"-","model":"BESTUNEB70"},{"plate":"AA-491-TF","chassis":"R1K03001","model":"BESTUNET55"},{"plate":"AA-492-SK","chassis":"RA004458","model":"KAIYI"},{"plate":"AA-492-TF","chassis":"P1K03147","model":"BESTUNET55"},{"plate":"AA-493-LL-01","chassis":"-","model":"FAWBESTUNE"},{"plate":"AA-493-SK","chassis":"RE058147","model":"CHERYTIGGO2PRO"},{"plate":"AA-493-TF","chassis":"R1K04346","model":"BESTUNET55"},{"plate":"AA-494-LL","chassis":"R1K06619","model":"BESTUNET55"},{"plate":"AA-494-SK","chassis":"RA004588","model":"KAIYI"},{"plate":"AA-494-TF","chassis":"R1K03070","model":"BESTUNET55"},{"plate":"AA-495-LL","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-495-TF","chassis":"R1K03068","model":"BESTUNET55"},{"plate":"AA-496-LL-01","chassis":"-","model":"FAWBESTUNE"},{"plate":"AA-496-TF","chassis":"R1K03007","model":"BESTUNET55"},{"plate":"AA-497-LL-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-497-TF","chassis":"P1K04098","model":"BESTUNET55"},{"plate":"AA-498-LL-01","chassis":"R1K06582","model":"BESTUNET55"},{"plate":"AA-498-TF","chassis":"P1K02176","model":"BESTUNET55"},{"plate":"AA-501-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-502-LL-01","chassis":"R1K06611","model":"BESTUNET55"},{"plate":"AA-502-TF-01","chassis":"P1K61127","model":"BESTUNET55"},{"plate":"AA-503-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-503-TF","chassis":"P1K61110","model":"BESTUNET55"},{"plate":"AA-504-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-504-TF","chassis":"P1K61135","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-506-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-506-TF-01","chassis":"R1K02987","model":"BESTUNET55"},{"plate":"AA-507-TF","chassis":"R1K03019","model":"BESTUNET55"},{"plate":"AA-508-SK","chassis":"RA004454","model":"KAIYI"},{"plate":"AA-508-TF-01","chassis":"R1K02990","model":"BESTUNET55"},{"plate":"AA-509-TF","chassis":"R1K02984","model":"BESTUNET55"},{"plate":"AA-510-SK","chassis":"RA004434","model":"KAIYI"},{"plate":"AA-510-TF","chassis":"R1K02957","model":"BESTUNET55"},{"plate":"AA-512-TF-01","chassis":"R1K02977","model":"BESTUNET55"},{"plate":"AA-513-TF","chassis":"P1K02144","model":"BESTUNET55"},{"plate":"AA-514-TF","chassis":"R1K14286","model":"BESTUNEB70"},{"plate":"AA-515-TF","chassis":"R1K02986","model":"BUSTUNET55"},{"plate":"AA-516-RQ","chassis":"RE022990","model":"CHERYTIGGO2"},{"plate":"AA-516-SK","chassis":"RA004455","model":"KAIYI"},{"plate":"AA-516-TF","chassis":"R1K14255","model":"BESTUNEB70"},{"plate":"AA-517-TF-01","chassis":"R1K14342","model":"BESTUNEB70"},{"plate":"AA-518-TF-01","chassis":"R1K14355","model":"BESTUNEB70"},{"plate":"AA-519-TF","chassis":"R1K03026","model":"BESTUNET55"},{"plate":"AA-520-TF","chassis":"R1K04246","model":"BESTUNET55"},{"plate":"AA-521-SK","chassis":"RA004582","model":"KAIYI"},{"plate":"AA-521-TF","chassis":"P1K30651","model":"BESTUNET55"},{"plate":"AA-522-TF-01","chassis":"R1K04260","model":"BESTUNET55"},{"plate":"AA-492-LL-01","chassis":"R1K16922","model":"FAWBESTUNEB70"},{"plate":"AA-523-TF","chassis":"R1K04250","model":"BESTUNET55"},{"plate":"AA-524-SK","chassis":"RA004740","model":"KAIYI"},{"plate":"AA-524-TF","chassis":"R1K02494","model":"BESTUNET55"},{"plate":"AA-525-SK","chassis":"RA004484","model":"KAIYI"},{"plate":"AA-525-TF","chassis":"R1K04237","model":"BESTUNET55"},{"plate":"AA-526-TF","chassis":"R1K03028","model":"BESTUNET55"},{"plate":"AA-527-TF","chassis":"P1K03138","model":"BESTUNET55"},{"plate":"AA-528-SK","chassis":"RA004688","model":"KAIYI"},{"plate":"AA-528-TF","chassis":"R1K02975","model":"BESTUNET55"},{"plate":"AA-532-SK","chassis":"RA004432","model":"KAIYI"},{"plate":"AA-533-SK","chassis":"RA004428","model":"KAIYI"},{"plate":"AA-535-SK","chassis":"RA004598","model":"KAIYI"},{"plate":"AA-536-SK","chassis":"RA004478","model":"KAIYI"},{"plate":"AA-537-SK","chassis":"RA004739","model":"KAIYI"},{"plate":"AA-539-SK","chassis":"RA004431","model":"KAIYI"},{"plate":"AA-540-SK","chassis":"RA004585","model":"KAIYI"},{"plate":"AA-541-SK","chassis":"RA004604","model":"KAIYI"},{"plate":"AA-543-SK","chassis":"RA004507","model":"KAIYI"},{"plate":"AA-547-SK","chassis":"RA004499","model":"KAIYI"},{"plate":"AA-548-SK","chassis":"RA004513","model":"KAIYI"},{"plate":"AA-548-TG-01","chassis":"R1K04244","model":"BESTUNET55"},{"plate":"AA-549-SK","chassis":"RA004439","model":"KAIYI"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-552-LJ-01","chassis":"B70","model":"BESTUNEFAW"},{"plate":"AA-553-LJ-01","chassis":"1S06614","model":"FAWBESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-557-TG-01","chassis":"R1K14401","model":"BESTUNEB70"},{"plate":"AA-558-SK","chassis":"RA004433","model":"KAIYI"},{"plate":"AA-560-SK","chassis":"RA004487","model":"KAIYI"},{"plate":"AA-561-SK","chassis":"RA004763","model":"KAIYI"},{"plate":"AA-562-LL-01","chassis":"-","model":"BESTUNET55"},{"plate":"AA-563-SK","chassis":"RA004584","model":"KAIYI"},{"plate":"AA-568-SK","chassis":"RA004714","model":"KAIYI"},{"plate":"AA-570-ST","chassis":"RE022991","model":"CHERYTIGGO2"},{"plate":"AA-572-SK","chassis":"RA004435","model":"KAIYI"},{"plate":"AA-576-TQ","chassis":"R1K14237","model":"BESTUNEB70"},{"plate":"AA-577-SK","chassis":"RA004465","model":"KAIYI"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-579-SK","chassis":"RA004497","model":"KAIYI"},{"plate":"AA-580-SK","chassis":"RA004501","model":"KAIYI"},{"plate":"AA-580-TQ","chassis":"R1K02219","model":"BESTUNET55"},{"plate":"AA-581-SK","chassis":"RA004586","model":"KAIYI"},{"plate":"AA-581-SX","chassis":"RE022953","model":"CHERYTIGGO2"},{"plate":"AA-583-SK","chassis":"-","model":"KAIYIPRO"},{"plate":"AA-584-TQ-01","chassis":"R1K14251","model":"BESTUNEB70"},{"plate":"AA-585-SK","chassis":"RA004448","model":"KAIYI"},{"plate":"AA-586-LK-01","chassis":"R1K06658","model":"FAWBESTUNET55"},{"plate":"AA-587-LK-01","chassis":"R1K06630","model":"FAWBESTUNET55"},{"plate":"AA-587-NT-01","chassis":"R1K14203","model":"BESTUNEB70"},{"plate":"AA-588-LK-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-588-RV","chassis":"RE058163","model":"CHERYTIGGO2PRO"},{"plate":"AA-589-LK-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-590-LK-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-591-LK-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-592-LK-01","chassis":"R1K06640","model":"FAWBESTUNET55"},{"plate":"AA-592-TG","chassis":"R1K02976","model":"BESTUNET55"},{"plate":"AA-593-LK-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-594-SK","chassis":"RA004474","model":"KAIYI"},{"plate":"AA-597-SK","chassis":"RA004498","model":"KAIYI"},{"plate":"AA-601-SK","chassis":"RA004460","model":"KAIYI"},{"plate":"AA-602-RV","chassis":"RE058160","model":"CHERYTIGGO2PRO"},{"plate":"AA-602-SK","chassis":"RA004479","model":"KAIYI"},{"plate":"AA-603-RV","chassis":"RE058184","model":"CHERYTIGGO2PRO"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-604-SK","chassis":"RA004502","model":"KAIYI"},{"plate":"AA-605-SK","chassis":"RA004488","model":"KAIYI"},{"plate":"AA-608-RV","chassis":"RE058166","model":"CHERYTIGGO2PRO"},{"plate":"AA-608-SK","chassis":"RA004602","model":"KAIYI"},{"plate":"AA-610-RV","chassis":"RE022947","model":"CHERYTIGGO2"},{"plate":"AA-611-RV","chassis":"RE022981","model":"CHERYTIGGO2"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-612-RV","chassis":"RE058161","model":"CHERYTIGGO2PRO"},{"plate":"AA-613-RV","chassis":"RE058158","model":"CHERYTIGGO2PRO"},{"plate":"AA-614-LK-01","chassis":"R1K16813","model":"FAWBESTUNEB70"},{"plate":"AA-614-TG-01","chassis":"R1K04251","model":"BESTUNET55"},{"plate":"AA-614-TQ-01","chassis":"R1K02316","model":"BESTUNET55"},{"plate":"AA-615-RV","chassis":"RE058175","model":"CHERYTIGGO2PRO"},{"plate":"AA-615-SK","chassis":"RA004593","model":"KAIYI"},{"plate":"AA-616-TQ","chassis":"R1K02374","model":"BESTUNET55"},{"plate":"AA-617-SK","chassis":"RA004440","model":"KAIYI"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-619-SK","chassis":"RA004438","model":"KAIYI"},{"plate":"AA-620-SK","chassis":"RA004459","model":"KAIYI"},{"plate":"AA-621-RV","chassis":"RE058165","model":"CHERYTIGGO2PRO"},{"plate":"AA-622-TQ-01","chassis":"R1K02662","model":"BESTUNET55"},{"plate":"AA-623-SL","chassis":"RE022956","model":"CHERYTIGGO2"},{"plate":"AA-624-SK","chassis":"RA004496","model":"KAIYI"},{"plate":"AA-624-TQ-01","chassis":"R1K03148","model":"BESTUNET55"},{"plate":"AA-625-KZ","chassis":"SRG552352","model":"SUZUKIDZIRE"},{"plate":"AA-626-SK","chassis":"RA004430","model":"KAIYI"},{"plate":"AA-626-TN-01","chassis":"R1K02362","model":"BESTUNET55"},{"plate":"AA-629-SK","chassis":"RA004601","model":"KAIYI"},{"plate":"AA-631-LY","chassis":"G532439","model":"SUZUKIDZIRE"},{"plate":"AA-631-SK","chassis":"RA004481","model":"KAIYI"},{"plate":"AA-631-TQ","chassis":"R1K02617","model":"BESTUNET55"},{"plate":"AA-633-TQ-01","chassis":"R1K02283","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-639-SK","chassis":"RA004469","model":"KAIYI"},{"plate":"AA-639-TG","chassis":"R1K02979","model":"BESTUNET55"},{"plate":"AA-639-TQ","chassis":"R1K00623","model":"BESTUNET55"},{"plate":"AA-641-RV","chassis":"RE058156","model":"CHERYTIGGO2PRO"},{"plate":"AA-641-SK","chassis":"RA004592","model":"KAIYI"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-647-RV","chassis":"RE022985","model":"CHERYTIGGO2"},{"plate":"AA-648-TQ-01","chassis":"R1K14244","model":"BESTUNEB70"},{"plate":"AA-650-TR","chassis":"R1K14283","model":"BESTUNEB70"},{"plate":"AA-652-RV","chassis":"RE058153","model":"CHERYTIGGO2PRO"},{"plate":"AA-653-RV","chassis":"RE022984","model":"CHERYTIGGO2"},{"plate":"AA-654-SK","chassis":"RA004492","model":"KAIYI"},{"plate":"AA-657-RV","chassis":"RE058189","model":"CHERYTIGGO2PRO"},{"plate":"AA-658-SK","chassis":"RA004590","model":"KAIYI"},{"plate":"AA-659-TQ-01","chassis":"R1K03011","model":"BESTUNET55"},{"plate":"AA-661-SK","chassis":"RA004503","model":"KAIYI"},{"plate":"AA-662-RV","chassis":"RE022992","model":"CHERYTIGGO2"},{"plate":"AA-664-RV","chassis":"E058179","model":"CHERYTIGGO2PRO"},{"plate":"AA-664-TQ","chassis":"R1K02998","model":"BESTUNET55"},{"plate":"AA-665-RV","chassis":"RE058151","model":"CHERYTIGGO2PRO"},{"plate":"AA-668-RV","chassis":"RE058169","model":"CHERYTIGGO2PRO"},{"plate":"AA-671-RV","chassis":"RE022960","model":"CHERYTIGGO2"},{"plate":"AA-672-SK","chassis":"RA004710","model":"KAIYI"},{"plate":"AA-672-TQ","chassis":"R1K03015","model":"BESTUNET55"},{"plate":"AA-678-TQ-01","chassis":"R1K02607","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-680-TQ-01","chassis":"R1K00442","model":"BESTUNET55"},{"plate":"AA-681-SK","chassis":"RA004583","model":"KAIYI"},{"plate":"AA-682-TY-01","chassis":"R1K03130","model":"BESTUNET55"},{"plate":"AA-683-SK","chassis":"RA004711","model":"KAIYI"},{"plate":"AA-684-SL","chassis":"RA004442","model":"KAIYI"},{"plate":"AA-690-SL","chassis":"RA004441","model":"KAIYI"},{"plate":"AA-690-TQ-01","chassis":"R1K02661","model":"BESTUNET55"},{"plate":"AA-690-TY","chassis":"R1K02555","model":"BESTUNET55"},{"plate":"AA-691-RQ","chassis":"RE022967","model":"CHERYTIGGO2"},{"plate":"AA-691-TY-01","chassis":"R1K03274","model":"BESTUNET55"},{"plate":"AA-692-SK","chassis":"RA004500","model":"KAIYI"},{"plate":"AA-693-SL","chassis":"RA004445","model":"KAIYI"},{"plate":"AA-695-TY","chassis":"R1K03282","model":"BESTUNET55"},{"plate":"AA-697-GL","chassis":"PE053863","model":"CHERYTIGGO2"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-701-TQ-01","chassis":"R1K02284","model":"BESTUNET55"},{"plate":"AA-703-NE","chassis":"SRG547886","model":"SUZUKIDZIRE"},{"plate":"AA-704-SL","chassis":"RA004466","model":"KAIYI"},{"plate":"AA-706-SK","chassis":"RA004468","model":"KAIYI"},{"plate":"AA-706-TY","chassis":"R1K03127","model":"BESTUNET55"},{"plate":"AA-708-SK","chassis":"RA004452","model":"KAIYI"},{"plate":"AA-708-TQ","chassis":"R1K03215","model":"BESTUNET55"},{"plate":"AA-710-SK","chassis":"RA004482","model":"KAIYI"},{"plate":"AA-711-RQ","chassis":"RE058182","model":"CHERYTIGGO2PRO"},{"plate":"AA-711-SK","chassis":"RA004599","model":"KAIYI"},{"plate":"AA-712-SL","chassis":"RA004444","model":"KAIYI"},{"plate":"AA-712-TY-01","chassis":"R1K02559","model":"BESTUNET55"},{"plate":"AA-713-SK","chassis":"RA004715","model":"KAIYI"},{"plate":"AA-716-SK","chassis":"RA004467","model":"KAIYI"},{"plate":"AA-719-SL","chassis":"RA004443","model":"KAIYI"},{"plate":"AA-720-SK","chassis":"RA004462","model":"KAIYI"},{"plate":"AA-722-SK","chassis":"RA004451","model":"KAIYI"},{"plate":"AA-725-NT-01","chassis":"G536144","model":"SUZUKIDZIRE"},{"plate":"AA-729-SL","chassis":"RA004471","model":"KAIYI"},{"plate":"AA-730-SK","chassis":"RA004476","model":"KAIYI"},{"plate":"AA-731-SL","chassis":"RA004463","model":"KAIYI"},{"plate":"AA-740-TY","chassis":"R1K02313","model":"BESTUNET55"},{"plate":"AA-743-SK","chassis":"RA004713","model":"KAIYI"},{"plate":"AA-744-SL","chassis":"RA004447","model":"KAIYI"},{"plate":"AA-747-SK","chassis":"RA004457","model":"KAIYI"},{"plate":"AA-749-LZ","chassis":"SRG550822","model":"SUZUKIDZIRE"},{"plate":"AA-749-TY","chassis":"R1K02207","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-751-LZ","chassis":"SRG548905","model":"SUZUKIDZIRE"},{"plate":"AA-753-LZ","chassis":"SRG551009","model":"SUZUKIDZIRE"},{"plate":"AA-754-SK","chassis":"RA004490","model":"KAIYI"},{"plate":"AA-754-TY-01","chassis":"R1K02575","model":"BESTUNET55"},{"plate":"AA-756-TY","chassis":"R1K02346","model":"BESTUNET55"},{"plate":"AA-758-TY-01","chassis":"R1K02336","model":"BESTUNET55"},{"plate":"AA-759-TY-01","chassis":"R1K02600","model":"BESTUNET55"},{"plate":"AA-760-LF","chassis":"-","model":"SUZUKIDZIRE"},{"plate":"AA-760-TY-01","chassis":"R1K02519","model":"BESTUNET55"},{"plate":"AA-765-SL","chassis":"RA004449","model":"KAIYI"},{"plate":"AA-765-TY","chassis":"R1K02515","model":"BESTUNET55"},{"plate":"AA-772-LZ","chassis":"SRG551244","model":"SUZUKIDZIRE"},{"plate":"AA-774-LZ-02","chassis":"SRG551191","model":"SUZUKIDZIRE"},{"plate":"AA-774-SL","chassis":"RA004473","model":"KAIYI"},{"plate":"AA-778-TL-01","chassis":"R1K03081","model":"BESTUNET55"},{"plate":"AA-779-TY","chassis":"R1K02384","model":"BESTUNET55"},{"plate":"AA-779-VP","chassis":"R1K02995","model":"BESTUNET55"},{"plate":"AA-781-LZ","chassis":"SRG548796","model":"SUZUKIDZIRE"},{"plate":"AA-781-TL","chassis":"R1K03055","model":"BESTUNET55"},{"plate":"AA-781-VP-01","chassis":"R1K03046","model":"BESTUNET55"},{"plate":"AA-782-SL","chassis":"RA004486","model":"KAIYI"},{"plate":"AA-785-TL-01","chassis":"R1K03115","model":"BESTUNET55"},{"plate":"AA-785-TY-01","chassis":"R1K02505","model":"BESTUNET55"},{"plate":"AA-788-SK","chassis":"RA004508","model":"KAIYI"},{"plate":"AA-793-LZ","chassis":"SRG548824","model":"SUZUKIDZIRE"},{"plate":"AA-795-LZ","chassis":"SRG550848","model":"SUZUKIDZIRE"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AA-797-TY","chassis":"R1K03219","model":"BESTUNET55"},{"plate":"AA-798-NE","chassis":"SRG547075","model":"SUZUKIDZIRE"},{"plate":"AA-804-NE","chassis":"SRG547679","model":"SUZUKIDZIRE"},{"plate":"AA-810-RV","chassis":"RE022987","model":"CHERYTIGGO2"},{"plate":"AA-810-SK","chassis":"RA004427","model":"KAIYI"},{"plate":"AA-811-SK","chassis":"RA004603","model":"KAIYI"},{"plate":"AA-814-NE","chassis":"SRG547409","model":"SUZUKIDZIRE"},{"plate":"AA-815-LF","chassis":"-","model":"SUZUKIDZIRE"},{"plate":"AA-816-LZ","chassis":"SRG551121","model":"SUZUKIDZIRE"},{"plate":"AA-797-LL-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-817-LN-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-818-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-819-LP-01","chassis":"R1K14225","model":"FAWBESTUNEB70"},{"plate":"AA-821-LF","chassis":"G536901","model":"SUZUKIDZIRE"},{"plate":"AA-822-KV","chassis":"SRG550724","model":"SUZUKIDZIRE"},{"plate":"AA-822-TY-01","chassis":"R1K02682","model":"BESTUNET55"},{"plate":"AA-824-KV","chassis":"SRG550071","model":"SUZUKIDZIRE"},{"plate":"AA-825-TY","chassis":"R1K02668","model":"BESTUNET55"},{"plate":"AA-827-GC","chassis":"-","model":"CHERYTIGGO"},{"plate":"AA-827-RV","chassis":"RE058172","model":"CHERYTIGGO2PRO"},{"plate":"AA-827-TN-01","chassis":"R1K02292","model":"BESTUNET55"},{"plate":"AA-832-SL","chassis":"RA004491","model":"KAIYI"},{"plate":"AA-832-TY","chassis":"R1K03225","model":"BESTUNET55"},{"plate":"AA-835-LF","chassis":"G531707","model":"SUZUKIDZIRE"},{"plate":"AA-836-TY-01","chassis":"R1K02700","model":"BESTUNET55"},{"plate":"AA-837-TL-01","chassis":"R1K03197","model":"BESTUNET55"},{"plate":"AA-840-TY","chassis":"R1K02704","model":"BESTUNET55"},{"plate":"AA-843-KV","chassis":"SRG551644","model":"SUZUKIDZIRE"},{"plate":"AA-844-RV","chassis":"RE022946","model":"CHERYTIGGO2PRO"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-848-TY-01","chassis":"R1K02295","model":"BESTUNET55"},{"plate":"AA-850-TL","chassis":"R1K03155","model":"BESTUNET55"},{"plate":"AA-851-RV","chassis":"RE022974","model":"CHERYTIGGO2"},{"plate":"AA-853-TE","chassis":"P1K31014","model":"BESTUNET55"},{"plate":"AA-854-TE-01","chassis":"R1K03049","model":"BESTUNET55"},{"plate":"AA-854-TL","chassis":"R1K03078","model":"BESTUNET55"},{"plate":"AA-856-TE-01","chassis":"R1K14390","model":"BESTUNET55"},{"plate":"AA-857-RV","chassis":"RE058152","model":"CHERYTIGGO2PRO"},{"plate":"AA-858-TE-01","chassis":"R1K03004","model":"BESTUNET55"},{"plate":"AA-860-TE","chassis":"R1K14320","model":"BESTUNEB70"},{"plate":"AA-860-TY-01","chassis":"R1K02558","model":"BESTUNET55"},{"plate":"AA-862-TE-01","chassis":"R1K14308","model":"BESTUNEB70"},{"plate":"AA-863-RV","chassis":"RE022973","model":"CHERYTIGGO2"},{"plate":"AA-865-RV","chassis":"RE058178","model":"CHERYTIGGO2PRO"},{"plate":"AA-867-RV","chassis":"RE058188","model":"CHERYTIGGO2PRO"},{"plate":"AA-868-TE","chassis":"R1K04329","model":"BESTUNET55"},{"plate":"AA-870-TE","chassis":"P1K03148","model":"BESTUNET55(BALISERETIRE))"},{"plate":"AA-871-SQ","chassis":"RE022997","model":"CHERYTIGGO2"},{"plate":"AA-872-TL","chassis":"R1K03167","model":"BESTUNET55"},{"plate":"AA-876-RV","chassis":"RE022964","model":"CHERYTIGGO2"},{"plate":"AA-877-SK","chassis":"RA004687","model":"KAIYI"},{"plate":"AA-877-TE-01","chassis":"R1K04333","model":"BESTUNET55"},{"plate":"AA-881-TE-01","chassis":"R1K04324","model":"BESTUNET55"},{"plate":"AA-883-LT-01","chassis":"R1K16901","model":"BESTUNEB70"},{"plate":"AA-884-TE","chassis":"R1K03033","model":"BESTUNET55"},{"plate":"AA-886-SK","chassis":"RA004595","model":"KAIYI"},{"plate":"AA-886-TE","chassis":"P1K02148","model":"BESTUNET55"},{"plate":"AA-886-TL-01","chassis":"R1K02183","model":"BESTUNET55"},{"plate":"AA-891-RP","chassis":"RE022958","model":"CHERYTIGGO"},{"plate":"AA-893-RV","chassis":"RE022948","model":"CHERYTIGGO2PRO"},{"plate":"AA-893-TL","chassis":"R1K00680","model":"BESTUNET55"},{"plate":"AA-894-TL-01","chassis":"R1K03113","model":"BESTUNET55"},{"plate":"AA-895-TL","chassis":"R1K02500","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-896-RP","chassis":"RE058185","model":"CHERYTIGGO2PRO"},{"plate":"AA-898-TL-01","chassis":"R1K03159","model":"BESTUNET55"},{"plate":"AA-899-RV","chassis":"RE022957","model":"CHERYTIGGO2"},{"plate":"AA-899-SK","chassis":"RA004464","model":"KAIYI"},{"plate":"AA-902-TL-01","chassis":"R1K00645","model":"BESTUNET55"},{"plate":"AA-905-SK","chassis":"RA004483","model":"KAIYI"},{"plate":"AA-905-TL-01","chassis":"R1K02332","model":"BESTUNET55"},{"plate":"AA-907-SK","chassis":"RA004485","model":"KAIYI"},{"plate":"AA-908-RP","chassis":"RE058171","model":"CHERYTIGGO2PRO"},{"plate":"AA-908-TE","chassis":"R1K14280","model":"BESTUNEB70"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-910-RV","chassis":"RE058181","model":"CHERYTIGGO2PRO"},{"plate":"AA-912-TE","chassis":"R1K09068","model":"BESTUNET55"},{"plate":"AA-913-TE-01","chassis":"R1K03006","model":"BESTUNET55"},{"plate":"AA-913-TL-01","chassis":"R1K00629","model":"BESTUNET55"},{"plate":"AA-916-TE-01","chassis":"R1K03047","model":"BESTUNET55"},{"plate":"AA-917-LP-01","chassis":"R1K06585","model":"BESTUNET55"},{"plate":"AA-918-RV","chassis":"RE022963","model":"CHERYTIGGO2"},{"plate":"AA-923-RV","chassis":"RE022993","model":"CHERYTIGGO2"},{"plate":"AA-923-SK","chassis":"RA004477","model":"KAIYI"},{"plate":"AA-925-SK","chassis":"RA004594","model":"KAIYI"},{"plate":"AA-926-RP","chassis":"RE058186","model":"CHERYTIGGO2PRO"},{"plate":"AA-927-SK","chassis":"RA004446","model":"KAIYI"},{"plate":"AA-932-KV-01","chassis":"SRG55033","model":"SUZUKIDZIRE"},{"plate":"AA-937-LL-01","chassis":"R1K06638","model":"FAWBESTUNET55"},{"plate":"AA-939-TE","chassis":"R1K02972","model":"BESTUNET55"},{"plate":"AA-940-RP","chassis":"RE058187","model":"CHERYTIGGO2PRO"},{"plate":"AA-940-TE","chassis":"R1K03044","model":"BESTUNET55"},{"plate":"AA-941-TE","chassis":"R1K02488","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-942-RP","chassis":"RE022962","model":"CHERYTIGGGO2"},{"plate":"AA-942-TE","chassis":"R1K09053","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-943-LZ","chassis":"-","model":"SUZUKIDZIRE"},{"plate":"AA-943-RP","chassis":"RE058170","model":"CHERYTIGGO2PRO"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-944-RP","chassis":"RE058148","model":"CHERYTIGGO2PRO"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-946-LY","chassis":"G531706","model":"SUZUKIDZIRE"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-947-TE","chassis":"R1K09056","model":"BESTUNET55"},{"plate":"AA-947-TL-01","chassis":"R1K02684","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-948-TE","chassis":"P1K04216","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-949-LL-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-950-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-950-TE","chassis":"P1K31122","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-951-TE","chassis":"R1K03009","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-952-LQ-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-952-TE","chassis":"R1K03003","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-953-LL-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-953-TE","chassis":"R1K03008","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-954-LL-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-954-TE","chassis":"R1K04344","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-955-LL-01","chassis":"-","model":"FAWBESTUNE"},{"plate":"AA-955-LY","chassis":"-","model":"SUZUKIDZIRE"},{"plate":"AA-955-TE","chassis":"P1K03151","model":"BESTUNET55"},{"plate":"AA-956-GG","chassis":"-","model":"LVVDB11B5PE053815"},{"plate":"AA-956-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-956-TE-01","chassis":"R1K04284","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-957-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-957-LY","chassis":"SRG547992","model":"SUZUKIDZIRE"},{"plate":"AA-957-TE","chassis":"R1K03010","model":"BESTUNET55"},{"plate":"AA-957-TL-01","chassis":"R1K02625","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-958-LL-01","chassis":"-","model":"FAWBESTUNET55"},{"plate":"AA-958-TE-01","chassis":"R1K02970","model":"BESTUNET55"},{"plate":"AA-959-GG","chassis":"PE053868","model":"CHERYTIGGO2"},{"plate":"AA-959-LL-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-959-TE","chassis":"R1K02985","model":"BESTUNET55"},{"plate":"AA-959-TL-01","chassis":"R1K02623","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-960-LL-01","chassis":"-","model":"FAWBESTUNEB70"},{"plate":"AA-960-TE","chassis":"P1K61123","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-961-TE","chassis":"R1K02994","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-962-TE-01","chassis":"R1K02492","model":"BESTUNET55"},{"plate":"AA-963-GG","chassis":"-","model":"ACCIDENTE"},{"plate":"AA-963-TE","chassis":"P1K02146","model":"BESTUNET55"},{"plate":"AA-964-GG","chassis":"PE053843","model":"CHERYTIGGO"},{"plate":"AA-964-TE","chassis":"R1K03057","model":"BESTUNET55"},{"plate":"AA-964-TL","chassis":"R1K02633","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-965-TE","chassis":"R1K03062","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-966-TE","chassis":"R1K03060","model":"BESTUNET55"},{"plate":"AA-967-GG","chassis":"PE053781","model":"CHERYTIGGO"},{"plate":"AA-967-TE","chassis":"R1K03005","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-968-TE","chassis":"R1K03043","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-969-TE","chassis":"R1K03027","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-970-TE-01","chassis":"R1K03035","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-971-TE","chassis":"R1K02484","model":"BESTUNET55"},{"plate":"AA-971-TL-01","chassis":"-","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-972-TE-01","chassis":"R1K03021","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-973-TE","chassis":"R1K14089","model":"BESTUNEB70"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-974-TE","chassis":"R1K14279","model":"BESTUNEB70"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-975-TE","chassis":"R1K14272","model":"BESTUNEB70"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-976-TE-01","chassis":"R1K14305","model":"BESTUNEB70"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-977-LY","chassis":"SRG531612","model":"SUZUKIDZIRE"},{"plate":"AA-977-TE","chassis":"R1K14343","model":"BESTUNEB70"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-978-TE-01","chassis":"R1K14292","model":"BESTUNEB70"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-979-RP","chassis":"RE022965","model":"CHERYTIGGO2"},{"plate":"AA-979-TE","chassis":"R1K14413","model":"BESTUNEB70"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-980-TE","chassis":"R1K03024","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-981-TE","chassis":"R1K14296","model":"BESTUNEB70"},{"plate":"AA-981-TN","chassis":"R1K02624","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-982-TE","chassis":"R1K03054","model":"BESTUNET55"},{"plate":"AA-983-TE","chassis":"R1K14290","model":"BESTUNEB70"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-984-TE","chassis":"R1K04205","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-985-LF","chassis":"-","model":"SUZUKIDZIRE"},{"plate":"AA-985-RP","chassis":"RE058176","model":"CHERYTIGGO2PRO"},{"plate":"AA-985-TE","chassis":"R1K03041","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-986-TE-01","chassis":"R1K14281","model":"BESTUNEB70"},{"plate":"AA-986-TN","chassis":"R1K00626","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-987-TE","chassis":"R1K03012","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-988-TE-01","chassis":"P1K04212","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-989-TE","chassis":"R1K02993","model":"BESTUNET55"},{"plate":"AA-989-TN","chassis":"R1K03067","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-991-TE","chassis":"R1K02945","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-992-TE","chassis":"R1K14249","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-993-LY","chassis":"G536921","model":"SUZUKIDZIRE"},{"plate":"AA-993-TE","chassis":"R1K14289","model":"BESTUNEB70"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-994-TE","chassis":"R1K02960","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-995-TE","chassis":"R1K02973","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-996-LF01","chassis":"RG534331","model":"SUZUKI"},{"plate":"AA-996-LY","chassis":"G532328","model":"SUZUKIDZIRE"},{"plate":"AA-996-TE","chassis":"R1K02996","model":"BESTUNET55"},{"plate":"A","chassis":"-","model":"-"},{"plate":"AA-997-TE","chassis":"P1K61152","model":"BESTUNET55"},{"plate":"AA-998-GG","chassis":"PE053807","model":"CHERYTIGGO2"},{"plate":"AA-998-TE","chassis":"R1K03018","model":"BESTUNET55"},{"plate":"-","chassis":"-","model":"-"},{"plate":"-","chassis":"-","model":"-"},{"plate":"-","chassis":"-","model":"-"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AB-525-AX","chassis":"SA016064","model":"KAIYIE5"},{"plate":"AB-532-AX-01","chassis":"SA016065","model":"KAIYIE5"},{"plate":"-","chassis":"-","model":"-"},{"plate":"AB-542-AX-01","chassis":"SA016050","model":"KAIYIE5"},{"plate":"AB-546-AX","chassis":"SA016066","model":"KAIYIE5"},{"plate":"AB-568-AX","chassis":"SA016075","model":"KAIYIE5"},{"plate":"C65573","chassis":"-","model":"MOTOBOXER"},{"plate":"C65583","chassis":"-","model":"MOTOBOXER"},{"plate":"C65585","chassis":"-","model":"MOTOBOXER"},{"plate":"C65668","chassis":"-","model":"MOTOBOXER"},{"plate":"C66006","chassis":"-","model":"MOTOBOXER"},{"plate":"C66045","chassis":"-","model":"MOTOBOXER"},{"plate":"C66052","chassis":"-","model":"MOTOBOXER"},{"plate":"C66073","chassis":"-","model":"MOTOBOXER"},{"plate":"C66092","chassis":"-","model":"MOTOBOXER"},{"plate":"C66121","chassis":"-","model":"MOTOBOXER"},{"plate":"CH:87961","chassis":"-","model":"MOTO"},{"plate":"CH:87983","chassis":"-","model":"MOTO"},{"plate":"CH:88019","chassis":"-","model":"MOTOBOXER"},{"plate":"CH:93385","chassis":"-","model":"MOTO"},{"plate":"CH:93401","chassis":"-","model":"MOTO"},{"plate":"CH:93449","chassis":"-","model":"MOTO"},{"plate":"K92344","chassis":"-","model":"MOTOBOXER"},{"plate":"K92358","chassis":"-","model":"MOTOBOXER"},{"plate":"K97855","chassis":"-","model":"MOTOBOXER"},{"plate":"-","chassis":"R1K11824","model":"BESTUNEPROELECTRIC"},{"plate":"-","chassis":"R1K11832","model":"BESTUNEPROELECTRIC"},{"plate":"-","chassis":"R1K11840","model":"BESTUNEPROELECTRIC"},{"plate":"-","chassis":"R1K11851","model":"BESTUNEPROELECTRIC"},{"plate":"-","chassis":"R1K11871","model":"BESTUNEPROELECTRIC"},{"plate":"-","chassis":"R1K11872","model":"BESTUNEPROELECTRIC"},{"plate":"-","chassis":"R1K11881","model":"BESTUNEPROELECTRIC"},{"plate":"-","chassis":"R1K19206","model":"BESTUNEPROELECTRIC"},{"plate":"-","chassis":"R1K19217","model":"BESTUNEPROELECTRIC"},{"plate":"-","chassis":"R1Y00015","model":"BESTUNEELECTRIQUEPONY"},{"plate":"-","chassis":"R1Y0023","model":"BESTUNEELECTRIQUEPONY"},{"plate":"-","chassis":"R1Y00028","model":"BESTUNEELECTRIQUEPONY"},{"plate":"-","chassis":"R1Y00033","model":"BESTUNEELECTRIQUEPONY"},{"plate":"-","chassis":"R1Y00079","model":"BESTUNEELECTRIQUEPONY"},{"plate":"-","chassis":"R1Y00137","model":"BESTUNEELECTRIQUEPONY"},{"plate":"-","chassis":"R1Y00145","model":"BESTUNEELECTRIQUEPONY"},{"plate":"-","chassis":"R1Y00878","model":"BESTUNEELECTRIQUEPONY"},{"plate":"-","chassis":"R1YOO108","model":"BESTUNEELECTRIQUEPONY"},{"plate":"-","chassis":"R1YOO140","model":"BESTUNEELECTRIQUEPONY"},{"plate":"-","chassis":"S1K07480","model":"BESTUNEPROELECTRIC"},{"plate":"-","chassis":"SA020443","model":"KAIYIE5"},{"plate":"-","chassis":"SA020444","model":"KAIYIE5"},{"plate":"-","chassis":"SA020445","model":"KAIYIE5"},{"plate":"-","chassis":"SA020446","model":"KAIYIE5"},{"plate":"-","chassis":"SA020451","model":"KAIYIE5"},{"plate":"-","chassis":"SA020453","model":"KAIYIE5"},{"plate":"-","chassis":"SA020454","model":"KAIYIE5"},{"plate":"-","chassis":"SA020457","model":"KAIYIE5"},{"plate":"-","chassis":"SA020466","model":"KAIYIE5"},{"plate":"-","chassis":"SA020471","model":"KAIYIE5"},{"plate":"-","chassis":"SA020473","model":"KAIYIE5"},{"plate":"-","chassis":"SA020479","model":"KAIYIE5"},{"plate":"-","chassis":"SA020487","model":"KAIYIE5"},{"plate":"-","chassis":"SA020488","model":"KAIYIE5"},{"plate":"-","chassis":"SA020491","model":"KAIYIE5"},{"plate":"-","chassis":"SA020498","model":"KAIYIE5"},{"plate":"-","chassis":"SA020499","model":"KAIYIE5"},{"plate":"-","chassis":"SA020509","model":"KAIYIE5"},{"plate":"-","chassis":"SA020516","model":"KAIYIE5"},{"plate":"-","chassis":"SA020517","model":"KAIYIE5"},{"plate":"-","chassis":"SA020521","model":"KAIYIE5"},{"plate":"SWC65584","chassis":"-","model":"MOTOBOXER"},{"plate":"SWC65589","chassis":"-","model":"MOTOBOXER"},{"plate":"SWC66020","chassis":"-","model":"MOTOBOXER"},{"plate":"SWC66025","chassis":"-","model":"MOTOBOXER"},{"plate":"SWC66029","chassis":"-","model":"MOTOBOXER"},{"plate":"SWC66042","chassis":"-","model":"MOTOBOXER"},{"plate":"SWC66046","chassis":"-","model":"MOTOBOXER"},{"plate":"SWC66125","chassis":"-","model":"MOTOBOXER"},{"plate":"SWC66144","chassis":"-","model":"MOTOBOXER"},{"plate":"SWK92328","chassis":"-","model":"MOTOBOXER"},{"plate":"SWK92341","chassis":"-","model":"MOTOBOXER"},{"plate":"66904WWCI01","chassis":"P1k03448","model":"BESTUNET55"},{"plate":"88112WWCI01","chassis":"RJK12778","model":"BESTUNET77"},{"plate":"88119WWCI01","chassis":"RJK12788","model":"BESTUNET77"},{"plate":"88120WWCI01","chassis":"RJK08877","model":"BESTUNET77"},{"plate":"88128WWCI01","chassis":"RJK08890","model":"BESTUNET77"},{"plate":"88165WWCI01","chassis":"R1K09086","model":"BESTUNET55"}]
+[];
 let vehFilter = 'tous';
 let jrFilter = 'tous';
 let vehSearch = '';
 let jrSearch = '';
+let flotteSearch = '';
+let fleetLimit = 50;
 
 function todayKey(){ const d=new Date(); return d.toISOString().slice(0,7); }
 function todayISO(){ return new Date().toISOString().slice(0,10); }
 
 function defaultKpis(){
   return {
-    valide:    {label:"Documents véhicules valides à jour", type:"percent", target:100, freq:"Mensuel", history:{}},
+    valide:    {label:"Documents vÃ©hicules valides Ã  jour", type:"percent", target:100, freq:"Mensuel", history:{}},
     retards:   {label:"Anticipation des renouvellements", type:"zero", unit:"retard", target:0, freq:"Mensuel", history:{}},
-    resolution:{label:"Résolution des pièces / documents manquants", type:"percent", target:95, freq:"Mensuel", history:{}},
+    resolution:{label:"RÃ©solution des piÃ¨ces / documents manquants", type:"percent", target:95, freq:"Mensuel", history:{}},
     objectifs: {label:"Atteinte des objectifs des Agents", type:"percent", target:85, freq:"Mensuel", history:{}},
-    discipline:{label:"Ponctualité, assiduité et discipline", type:"zero", unit:"absence non justifiée", target:0, freq:"Continu", history:{}}
+    discipline:{label:"PonctualitÃ©, assiduitÃ© et discipline", type:"zero", unit:"absence non justifiÃ©e", target:0, freq:"Continu", history:{}}
   };
 }
 
@@ -434,6 +467,7 @@ async function loadAll(){
   kpis     = await loadKey('gocab:kpis', defaultKpis());
   journal  = await loadKey('gocab:journal', []);
   strategy = await loadKey('gocab:strategy', {besoins:'', axes:'', budget:''});
+  fleet    = await loadKey('gocab:fleet', defaultFleet);
 
   document.getElementById('s-besoins').value = strategy.besoins || '';
   document.getElementById('s-axes').value = strategy.axes || '';
@@ -445,6 +479,8 @@ async function loadAll(){
   renderVehicles();
   renderAgents();
   renderJournal();
+  renderFleet();
+  updatePlatesDatalist();
 }
 
 /* ---------------- nav ---------------- */
@@ -478,12 +514,12 @@ function renderKpis(){
       const v = (val===undefined || val===null) ? null : val;
       const pct = v===null ? 0 : Math.min(100, Math.max(0, v));
       statusColor = v===null ? '#C9C4B3' : (v>=k.target ? 'var(--green)' : (v>=k.target-15 ? 'var(--amber)' : 'var(--red)'));
-      valueHtml = v===null ? '—' : (Math.round(v*10)/10)+'%';
+      valueHtml = v===null ? 'â€”' : (Math.round(v*10)/10)+'%';
       barHtml = `<div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${statusColor};"></div></div>`;
     } else {
       const v = (val===undefined || val===null) ? null : val;
       statusColor = v===null ? '#C9C4B3' : (v<=k.target ? 'var(--green)' : 'var(--red)');
-      valueHtml = v===null ? '—' : Math.round(v);
+      valueHtml = v===null ? 'â€”' : Math.round(v);
     }
 
     card.innerHTML = `
@@ -497,7 +533,7 @@ function renderKpis(){
       <div class="kpi-freq">${k.freq}</div>
       <div class="kpi-input">
         <input type="number" step="0.1" placeholder="valeur ce mois" id="kpi-in-${id}" value="${val ?? ''}">
-        <button class="btn small ghost" onclick="updateKpi('${id}')">Mettre à jour</button>
+        <button class="btn small ghost" onclick="updateKpi('${id}')">Mettre Ã  jour</button>
       </div>
     `;
     grid.appendChild(card);
@@ -544,7 +580,7 @@ function statusFor(days){
   return 'valide';
 }
 function statusLabel(s){
-  return s==='expire' ? 'Expiré' : s==='renouveler' ? 'À renouveler' : 'Valide';
+  return s==='expire' ? 'ExpirÃ©' : s==='renouveler' ? 'Ã€ renouveler' : 'Valide';
 }
 const docLabels = {carte_grise:'Carte grise', visite_technique:'Visite technique', carte_stationnement:'Carte de stationnement'};
 
@@ -561,26 +597,26 @@ function renderVehicles(){
   list.sort((a,b)=>a.days-b.days);
 
   if(vehicles.length===0){
-    wrap.innerHTML = `<div class="card empty"><b>Aucun véhicule enregistré</b>Ajoutez le premier document véhicule ci-dessous pour démarrer le suivi.</div>`;
+    wrap.innerHTML = `<div class="card empty"><b>Aucun vÃ©hicule enregistrÃ©</b>Ajoutez le premier document vÃ©hicule ci-dessous pour dÃ©marrer le suivi.</div>`;
     return;
   }
   if(list.length===0){
-    wrap.innerHTML = `<div class="card empty"><b>Aucun résultat</b>Essayez un autre filtre ou une autre recherche.</div>`;
+    wrap.innerHTML = `<div class="card empty"><b>Aucun rÃ©sultat</b>Essayez un autre filtre ou une autre recherche.</div>`;
     return;
   }
 
   let rows = list.map(v=>`
     <tr class="${v.status==='expire' ? 'row-expire' : ''}">
       <td class="plate">${v.plate}</td>
-      <td class="mono" style="font-size:11.5px;">${v.chassis || '—'}</td>
+      <td class="mono" style="font-size:11.5px;">${v.chassis || 'â€”'}</td>
       <td>${docLabels[v.docType]||v.docType}</td>
       <td class="mono">${new Date(v.dueDate+'T00:00:00').toLocaleDateString('fr-FR')}</td>
-      <td class="mono">${v.days<0 ? 'dépassé de '+Math.abs(v.days)+'j' : v.days+' j'}</td>
-      <td>${v.interpellationTime || '—'}</td>
-      <td>${v.agent || '—'}</td>
+      <td class="mono">${v.days<0 ? 'dÃ©passÃ© de '+Math.abs(v.days)+'j' : v.days+' j'}</td>
+      <td>${v.interpellationTime || 'â€”'}</td>
+      <td>${v.agent || 'â€”'}</td>
       <td>
         ${v.fileData ? `
-          <button class="icon-btn" title="Télécharger ${v.fileName}" onclick="downloadVehicleFile('${v.id}')" style="color:var(--blue); display:inline-flex; align-items:center; gap:4px;">
+          <button class="icon-btn" title="TÃ©lÃ©charger ${v.fileName}" onclick="downloadVehicleFile('${v.id}')" style="color:var(--blue); display:inline-flex; align-items:center; gap:4px;">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
@@ -588,7 +624,7 @@ function renderVehicles(){
             </svg>
             <span style="font-size:11px; max-width:80px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" class="mono">${v.fileName}</span>
           </button>
-        ` : '—'}
+        ` : 'â€”'}
       </td>
       <td><span class="stamp ${v.status}">${statusLabel(v.status)}</span></td>
       <td class="actions-cell">
@@ -606,10 +642,10 @@ function renderVehicles(){
       <thead>
         <tr>
           <th>Immatriculation</th>
-          <th>N° Châssis</th>
+          <th>NÂ° ChÃ¢ssis</th>
           <th>Document</th>
-          <th>Échéance</th>
-          <th>Délai</th>
+          <th>Ã‰chÃ©ance</th>
+          <th>DÃ©lai</th>
           <th>Temps d'interpellation</th>
           <th>Agent</th>
           <th>Fichier</th>
@@ -655,8 +691,8 @@ function exportVehiclesCSV(){
                           (v.agent||'').toLowerCase().includes(q) ||
                           (v.chassis||'').toLowerCase().includes(q));
   }
-  if(list.length===0){ alert('Aucune donnée à exporter pour ce filtre.'); return; }
-  const header = ['Immatriculation','N° Châssis','Document','Échéance','Délai (jours)','Temps d\'interpellation','Agent','Nom du fichier','Statut'];
+  if(list.length===0){ alert('Aucune donnÃ©e Ã  exporter pour ce filtre.'); return; }
+  const header = ['Immatriculation','NÂ° ChÃ¢ssis','Document','Ã‰chÃ©ance','DÃ©lai (jours)','Temps d\'interpellation','Agent','Nom du fichier','Statut'];
   const rows = list.map(v=>[
     csvEscape(v.plate), csvEscape(v.chassis||''), csvEscape(docLabels[v.docType]||v.docType), csvEscape(v.dueDate),
     csvEscape(v.days), csvEscape(v.interpellationTime||''), csvEscape(v.agent||''), csvEscape(v.fileName||''), csvEscape(statusLabel(v.status))
@@ -694,7 +730,7 @@ async function addVehicle(){
   const interpellation = document.getElementById('v-interpellation').value.trim();
   const fileInput = document.getElementById('v-file');
 
-  if(!plate || !date){ alert('Renseignez au minimum l\'immatriculation et la date d\'échéance.'); return; }
+  if(!plate || !date){ alert('Renseignez au minimum l\'immatriculation et la date d\'Ã©chÃ©ance.'); return; }
 
   let fileData = null;
   let fileName = null;
@@ -739,7 +775,7 @@ async function addVehicle(){
 }
 async function deleteVehicle(id){
   const v = vehicles.find(v=>v.id===id);
-  if(!confirm(`Supprimer le document ${v ? v.plate : ''} ? Cette action est irréversible.`)) return;
+  if(!confirm(`Supprimer le document ${v ? v.plate : ''} ? Cette action est irrÃ©versible.`)) return;
   vehicles = vehicles.filter(v=>v.id!==id);
   await saveKey('gocab:vehicles', vehicles);
   renderVehicles();
@@ -762,16 +798,16 @@ function renderAlerts(){
   let list = vehicles.map(v=>({...v, days:daysUntil(v.dueDate)})).filter(v=>v.days<=30);
   list.sort((a,b)=>a.days-b.days);
   if(list.length===0){
-    box.innerHTML = `<div class="empty"><b>Aucune échéance proche</b>Tous les documents véhicules ont une marge de plus de 30 jours.</div>`;
+    box.innerHTML = `<div class="empty"><b>Aucune Ã©chÃ©ance proche</b>Tous les documents vÃ©hicules ont une marge de plus de 30 jours.</div>`;
     return;
   }
   box.innerHTML = list.map(v=>`
     <div class="alert-row">
       <div>
-        <span class="plate mono">${v.plate}</span> — ${docLabels[v.docType]||v.docType}
-        <div class="who">${v.agent ? 'Agent : '+v.agent : 'Aucun agent assigné'}</div>
+        <span class="plate mono">${v.plate}</span> â€” ${docLabels[v.docType]||v.docType}
+        <div class="who">${v.agent ? 'Agent : '+v.agent : 'Aucun agent assignÃ©'}</div>
       </div>
-      <span class="stamp ${statusFor(v.days)}">${v.days<0 ? 'Dépassé '+Math.abs(v.days)+'j' : v.days+' j restants'}</span>
+      <span class="stamp ${statusFor(v.days)}">${v.days<0 ? 'DÃ©passÃ© '+Math.abs(v.days)+'j' : v.days+' j restants'}</span>
     </div>`).join('');
 }
 
@@ -782,7 +818,7 @@ function initials(name){
 function renderAgents(){
   const grid = document.getElementById('agent-grid');
   if(agents.length===0){
-    grid.innerHTML = `<div class="card empty" style="grid-column:1/-1;"><b>Aucun agent enregistré</b>Ajoutez votre équipe de planification ci-dessous.</div>`;
+    grid.innerHTML = `<div class="card empty" style="grid-column:1/-1;"><b>Aucun agent enregistrÃ©</b>Ajoutez votre Ã©quipe de planification ci-dessous.</div>`;
     return;
   }
   grid.innerHTML = agents.map(a=>{
@@ -800,8 +836,8 @@ function renderAgents(){
         </button>
       </div>
       <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color};"></div></div>
-      <div class="agent-stat"><span>Tâches réalisées</span><b>${a.done} / ${a.total}</b></div>
-      <div class="agent-stat"><span>Absences non justifiées</span><b style="color:${a.abs>0?'var(--red)':'var(--green)'}">${a.abs}</b></div>
+      <div class="agent-stat"><span>TÃ¢ches rÃ©alisÃ©es</span><b>${a.done} / ${a.total}</b></div>
+      <div class="agent-stat"><span>Absences non justifiÃ©es</span><b style="color:${a.abs>0?'var(--red)':'var(--green)'}">${a.abs}</b></div>
     </div>`;
   }).join('');
 }
@@ -823,7 +859,7 @@ async function addAgent(){
 }
 async function deleteAgent(id){
   const a = agents.find(a=>a.id===id);
-  if(!confirm(`Supprimer l'agent ${a ? a.name : ''} ? Cette action est irréversible.`)) return;
+  if(!confirm(`Supprimer l'agent ${a ? a.name : ''} ? Cette action est irrÃ©versible.`)) return;
   agents = agents.filter(a=>a.id!==id);
   await saveKey('gocab:agents', agents);
   renderAgents();
@@ -840,11 +876,11 @@ function renderJournal(){
   }
   list.sort((a,b)=> b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
   if(journal.length===0){
-    box.innerHTML = `<div class="card empty"><b>Aucune entrée</b>Ajoutez un rapport journalier, hebdomadaire ou mensuel ci-dessus.</div>`;
+    box.innerHTML = `<div class="card empty"><b>Aucune entrÃ©e</b>Ajoutez un rapport journalier, hebdomadaire ou mensuel ci-dessus.</div>`;
     return;
   }
   if(list.length===0){
-    box.innerHTML = `<div class="card empty"><b>Aucun résultat</b>Essayez un autre filtre ou une autre recherche.</div>`;
+    box.innerHTML = `<div class="card empty"><b>Aucun rÃ©sultat</b>Essayez un autre filtre ou une autre recherche.</div>`;
     return;
   }
   box.innerHTML = list.map(j=>`
@@ -872,7 +908,7 @@ async function addJournal(){
   const type = document.getElementById('j-type').value;
   const date = document.getElementById('j-date').value || todayISO();
   const text = document.getElementById('j-text').value.trim();
-  if(!text){ alert('Écrivez le contenu du rapport avant d\'enregistrer.'); return; }
+  if(!text){ alert('Ã‰crivez le contenu du rapport avant d\'enregistrer.'); return; }
   journal.push({id:'j'+Date.now(), type, date, text});
   await saveKey('gocab:journal', journal);
   document.getElementById('j-text').value='';
@@ -902,7 +938,7 @@ wireNote('s-budget','budget','flag-budget');
 function exportBackup(){
   const payload = {
     exportedAt: new Date().toISOString(),
-    vehicles, agents, kpis, journal, strategy
+    vehicles, agents, kpis, journal, strategy, fleet
   };
   downloadFile(`gocab_sauvegarde_${todayISO()}.json`, JSON.stringify(payload, null, 2), 'application/json');
 }
@@ -913,7 +949,7 @@ async function importBackup(evt){
     const text = await file.text();
     const data = JSON.parse(text);
     if(!data || typeof data !== 'object') throw new Error('Format invalide');
-    if(!confirm('Importer ce fichier remplacera toutes les données actuelles (véhicules, équipe, KPI, journal, stratégie). Continuer ?')) {
+    if(!confirm('Importer ce fichier remplacera toutes les donnÃ©es actuelles (vÃ©hicules, Ã©quipe, KPI, journal, stratÃ©gie, flotte). Continuer ?')) {
       evt.target.value = '';
       return;
     }
@@ -922,29 +958,147 @@ async function importBackup(evt){
     kpis     = data.kpis && typeof data.kpis==='object' ? data.kpis : kpis;
     journal  = Array.isArray(data.journal)  ? data.journal  : journal;
     strategy = data.strategy && typeof data.strategy==='object' ? data.strategy : strategy;
+    fleet    = Array.isArray(data.fleet)    ? data.fleet    : fleet;
 
     await saveKey('gocab:vehicles', vehicles);
     await saveKey('gocab:agents', agents);
     await saveKey('gocab:kpis', kpis);
     await saveKey('gocab:journal', journal);
     await saveKey('gocab:strategy', strategy);
+    await saveKey('gocab:fleet', fleet);
 
     document.getElementById('s-besoins').value = strategy.besoins || '';
     document.getElementById('s-axes').value = strategy.axes || '';
     document.getElementById('s-budget').value = strategy.budget || '';
 
-    renderKpis(); renderAlerts(); renderVehicles(); renderAgents(); renderJournal();
-    alert('Import terminé avec succès.');
+    renderKpis(); renderAlerts(); renderVehicles(); renderAgents(); renderJournal(); renderFleet(); updatePlatesDatalist();
+    alert('Import terminÃ© avec succÃ¨s.');
   }catch(e){
     if (file && file.name && file.name.match(/\.(pdf|doc|docx|xls|xlsx|ppt|pptx)$/i)) {
-      alert("Ce bouton « Importer » sert uniquement à restaurer une sauvegarde globale au format JSON.\n\nPour joindre un document PDF, Word, Excel ou PowerPoint à un véhicule, veuillez utiliser le formulaire en bas de l'onglet « Registre véhicules ».");
+      alert("Ce bouton Â« Importer Â» sert uniquement Ã  restaurer une sauvegarde globale au format JSON.\n\nPour joindre un document PDF, Word, Excel ou PowerPoint Ã  un vÃ©hicule, veuillez utiliser le formulaire en bas de l'onglet Â« Registre vÃ©hicules Â».");
     } else {
-      alert("Le fichier n'a pas pu être importé : format invalide.");
+      alert("Le fichier n'a pas pu Ãªtre importÃ© : format invalide.");
     }
   }finally{
     evt.target.value = '';
   }
 }
+
+/* ---------------- fleet management ---------------- */
+function renderFleet(){
+  const wrap = document.getElementById('flotte-table-wrap');
+  let list = fleet.slice();
+  if(flotteSearch){
+    const q = flotteSearch.toLowerCase();
+    list = list.filter(v=>(v.plate||'').toLowerCase().includes(q) || 
+                          (v.chassis||'').toLowerCase().includes(q) ||
+                          (v.model||'').toLowerCase().includes(q));
+  }
+
+  const countEl = document.getElementById('flotte-count');
+  countEl.textContent = `${list.length} vÃ©hicule(s) dans la flotte`;
+
+  if(fleet.length === 0){
+    wrap.innerHTML = `<div class="card empty"><b>Aucun vÃ©hicule dans la flotte</b>Ajoutez le premier vÃ©hicule de la flotte ci-dessous.</div>`;
+    return;
+  }
+  if(list.length === 0){
+    wrap.innerHTML = `<div class="card empty"><b>Aucun rÃ©sultat</b>Essayez un autre mot-clÃ©.</div>`;
+    return;
+  }
+
+  const displayed = list.slice(0, fleetLimit);
+
+  let rows = displayed.map(v=>`
+    <tr>
+      <td class="plate">${v.plate}</td>
+      <td class="mono" style="font-size:12px;">${v.chassis}</td>
+      <td>${v.model}</td>
+      <td class="actions-cell">
+        <button class="icon-btn" title="Supprimer de la flotte" onclick="deleteFleetVehicle('${v.plate}')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>
+        </button>
+      </td>
+    </tr>`).join('');
+
+  let loadMoreHtml = '';
+  if (list.length > fleetLimit) {
+    loadMoreHtml = `
+      <div style="text-align:center;margin-top:14px;">
+        <button class="btn ghost small" onclick="loadMoreFleet()">Afficher plus de vÃ©hicules</button>
+      </div>`;
+  }
+
+  wrap.innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Immatriculation</th>
+          <th>NÂ° ChÃ¢ssis</th>
+          <th>ModÃ¨le</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+    ${loadMoreHtml}`;
+}
+
+function loadMoreFleet(){
+  fleetLimit += 100;
+  renderFleet();
+}
+
+async function addFleetVehicle(){
+  const plate = document.getElementById('f-plate').value.trim();
+  const chassis = document.getElementById('f-chassis').value.trim();
+  const model = document.getElementById('f-model').value.trim();
+  if(!plate){ alert("Renseignez au minimum l'immatriculation."); return; }
+
+  if(fleet.some(v => v.plate.toUpperCase() === plate.toUpperCase())){
+    alert("Ce vÃ©hicule existe dÃ©jÃ  dans la flotte.");
+    return;
+  }
+
+  fleet.push({ plate, chassis: chassis || '-', model: model || '-' });
+  await saveKey('gocab:fleet', fleet);
+
+  document.getElementById('f-plate').value = '';
+  document.getElementById('f-chassis').value = '';
+  document.getElementById('f-model').value = '';
+
+  renderFleet();
+  updatePlatesDatalist();
+}
+
+async function deleteFleetVehicle(plate){
+  if(!confirm(`Supprimer le vÃ©hicule ${plate} de la flotte ?`)) return;
+  fleet = fleet.filter(v => v.plate !== plate);
+  await saveKey('gocab:fleet', fleet);
+  renderFleet();
+  updatePlatesDatalist();
+}
+
+function updatePlatesDatalist(){
+  const dl = document.getElementById('datalist-plates');
+  dl.innerHTML = fleet.map(v => `<option value="${v.plate}">${v.model !== '-' ? v.model : ''}</option>`).join('');
+}
+
+// Autocomplete Autofill Chassis
+document.getElementById('v-plate').addEventListener('input', (e) => {
+  const plateVal = e.target.value.trim().toUpperCase();
+  const match = fleet.find(v => v.plate.toUpperCase() === plateVal);
+  if (match) {
+    document.getElementById('v-chassis').value = match.chassis !== '-' ? match.chassis : '';
+  }
+});
+
+// Search fleet event listener
+document.getElementById('flotte-search').addEventListener('input', (e) => {
+  flotteSearch = e.target.value.trim();
+  fleetLimit = 50; // reset scroll limit
+  renderFleet();
+});
 
 ['v-plate','v-chassis','v-date','v-interpellation','v-agent'].forEach(id=>{
   document.getElementById(id).addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); addVehicle(); } });
@@ -952,8 +1106,13 @@ async function importBackup(evt){
 ['a-name','a-role','a-done','a-total','a-abs'].forEach(id=>{
   document.getElementById(id).addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); addAgent(); } });
 });
+['f-plate','f-chassis','f-model'].forEach(id=>{
+  document.getElementById(id).addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); addFleetVehicle(); } });
+});
 
 loadAll();
 </script>
+<datalist id="datalist-plates"></datalist>
 </body>
 </html>
+
